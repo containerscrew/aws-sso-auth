@@ -66,6 +66,15 @@ aws-profile () {
 }
 ```
 
+Then, `source` the file if needed:
+```shell
+source ~/.zshrc or source ~/.bashrc
+```
+
+Type `aws-profile` in your terminal, and you will see all the accounts you have credentials in your `$HOME/.aws/credentials`
+
+> **fzf** is needed as a dependency for the interactive account switcher
+
 # TO DO
 
 * Logging with env_logger (aws_config it's printing some unnecessary info)
