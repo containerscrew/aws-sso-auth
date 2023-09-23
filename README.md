@@ -31,7 +31,7 @@
 # Badges
 ![Test Status](https://github.com/containerscrew/aws-sso-rs/actions/workflows/test.yml/badge.svg)
 ![Release Status](https://github.com/containerscrew/aws-sso-rs/actions/workflows/release.yml/badge.svg)
-[![License](https://img.shields.io/github/license/aws-sso-rs/tftools)](/LICENSE)
+[![License](https://img.shields.io/github/license/containerscrew/aws-sso-rs)](/LICENSE)
 [![Release](https://img.shields.io/github/release/containerscrew/aws-sso-rs)](https://github.com/containerscrew/aws-sso-rs/releases/latest)
 
 # Disclaimer
