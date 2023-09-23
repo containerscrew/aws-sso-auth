@@ -1,9 +1,9 @@
-<p><div style="text-align: center;">
-<img src="assets/rust-logo.svg" alt="logo" width="250"/>
+<p align="center" >
+    <img src="assets/rust-logo.svg" alt="logo" width="250"/>
 <h3 style="text-align: center;">aws-sso-rs</h3>
 <p style="text-align: center;">Get your AWS credentials using SSO</p>
 <p style="text-align: center;">Build with ❤ in Rust</p>
-</div></p>
+</p>
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
