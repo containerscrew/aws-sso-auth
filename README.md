@@ -1,6 +1,6 @@
 <p align="center" >
     <img src="assets/rust-logo.svg" alt="logo" width="250"/>
-<h3 align="center">aws-sso-rs</h3>
+<h3 align="center">aws-sso-rs (BETA)</h3>
 <p align="center">Get your AWS credentials using SSO</p>
 <p align="center">Build with ❤ in Rust</p>
 </p>
