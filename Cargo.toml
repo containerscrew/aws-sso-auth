@@ -3,13 +3,13 @@ name = "aws-sso-rs"
 version = "0.1.0"
 edition = "2021"
 authors = ["containerscrew info@containerscrew.com"]
-rust-version = "1.68"
+rust-version = "1.72.1"
 
 
 [dependencies]
 aws-config = "0.56.1"
-aws-sdk-sso = "0.30.0"
-aws-sdk-ssooidc = "0.30.0"
+aws-sdk-sso = "0.31.1"
+aws-sdk-ssooidc = "0.31.2"
 clap = { version = "4.4.4", features = ["derive"] }
 configparser = "3.0.2"
 env_logger = "0.10.0"

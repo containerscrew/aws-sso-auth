@@ -1,6 +1,6 @@
 use std::io;
 use configparser::ini::Ini;
-use log::{error, info};
+use log::{error};
 use crate::lib::AccountCredentials;
 
 pub fn open_browser_url(url: &String) {
