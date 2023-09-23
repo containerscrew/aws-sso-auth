@@ -1,0 +1,18 @@
+[package]
+name = "aws-sso-rs"
+version = "0.1.0"
+edition = "2021"
+authors = ["containerscrew info@containerscrew.com"]
+
+
+[dependencies]
+aws-config = "0.56.1"
+aws-sdk-sso = "0.30.0"
+aws-sdk-ssooidc = "0.30.0"
+clap = { version = "4.4.4", features = ["derive"] }
+configparser = "3.0.2"
+env_logger = "0.10.0"
+home = "0.5.5"
+log = "0.4.20"
+tokio = { version = "1.15", features = ["full"] }
+webbrowser = "0.8.11"
