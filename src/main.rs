@@ -1,5 +1,5 @@
 use env_logger::{Env};
-
+use current_platform::{COMPILED_ON, CURRENT_PLATFORM};
 
 mod lib;
 mod utils;
@@ -13,6 +13,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Command line flags
     let cli = argparse::argparse();
+
+    // Platform information
+    println!("Currently platform: {}. Compiled in {}", CURRENT_PLATFORM, COMPILED_ON);
 
     // AWS Config
     let config = lib::init_config(&cli.region).await;
