@@ -5,10 +5,10 @@ repos:
       - id: check-merge-conflict
       - id: end-of-file-fixer
       - id: trailing-whitespace
-  # - repo: https://github.com/thlorenz/doctoc
-  #   rev: v2.2.0
-  #   hooks:
-  #     - id: doctoc
+  - repo: https://github.com/thlorenz/doctoc
+    rev: v2.2.0
+    hooks:
+      - id: doctoc
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.16.1
     hooks:

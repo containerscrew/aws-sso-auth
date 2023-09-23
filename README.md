@@ -13,10 +13,12 @@
 - [Disclaimer](#disclaimer)
 - [Introduction](#introduction)
 - [Installation](#installation)
+  - [Pre-commit](#pre-commit)
 - [Usage](#usage)
   - [Switching accounts](#switching-accounts)
 - [TO DO](#to-do)
 - [Developing](#developing)
+  - [Requirements](#requirements)
   - [Clone](#clone)
   - [Cargo run](#cargo-run)
   - [Build](#build)
@@ -38,6 +40,8 @@ This tools is just in **BETA** mode. It's working fine and you can download all 
 # Installation
 
 TO DO: provide automated pipelines to generate binaries with ARM&AMD binaries to `github releases`. Provide formula for brew mac users, and more!
+
+By the moment, take a look to the **Developing** section below to use this tool locally using **cargo**.
 
 ## Pre-commit
 [pre-commit](./docs/pre-commit.md)
@@ -74,6 +78,14 @@ aws-profile () {
 * more...
 
 # Developing
+
+## Requirements
+
+* Rust
+* Cargo
+* Rustup
+
+Take a look to the [official documentation](https://www.rust-lang.org/tools/install)
 
 ## Clone
 
