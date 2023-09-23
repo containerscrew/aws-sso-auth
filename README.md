@@ -55,6 +55,8 @@ aws-sso-rs --start-url https://XXXXXX.awsapps.com/start --region eu-west-1
 * **start_url:** your start URL of SSO AWS app (https://docs.aws.amazon.com/singlesignon/latest/userguide/howtochangeURL.html)
 * **region:** AWS region where you have your AWS SSO configured. By the default is `eu-west-1` (Ireland)
 
+> All the credentials will be saved in your $HOME/.aws/credentials with the following pattern: [AccountName@RoleName] you are assuming
+
 ## Switching accounts
 
 Copy the following function in your `.zshrc` or `.bashrc`:
@@ -80,11 +82,11 @@ Type `aws-profile` in your terminal, and you will see all the accounts you have 
 * Logging with env_logger (aws_config it's printing some unnecessary info)
 > https://docs.aws.amazon.com/sdk-for-rust/latest/dg/logging.html
 > https://github.com/awslabs/aws-sdk-rust/discussions/771
-* Speed credentials download with `async` + `tokio:spawn` threading.
+* Speed credentials download with `async` + `tokio:spawn` threading. The current code is not as fast as I would like
 * Code refactoring
 * Github actions pipeline to create binary and push to `releases`
 * Testing
-* more...
+* Imagine you have 600 accounts with access in your AWS SSO portal, but you only want to fetch 100. How you can limit that?
 
 # Developing
 
