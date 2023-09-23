@@ -2,7 +2,7 @@
     <img src="assets/rust-logo.svg" alt="logo" width="250"/>
 <h3 align="center">aws-sso-rs</h3>
 <p align="center">Get your AWS credentials using SSO</p>
-<p style="text-align: center;">Build with ❤ in Rust</p>
+<p align="center">Build with ❤ in Rust</p>
 </p>
 
 
@@ -13,8 +13,13 @@
 - [Disclaimer](#disclaimer)
 - [Introduction](#introduction)
 - [Installation](#installation)
-- [How to use](#how-to-use)
+- [Usage](#usage)
+  - [Switching accounts](#switching-accounts)
 - [TO DO](#to-do)
+- [Developing](#developing)
+  - [Clone](#clone)
+  - [Cargo run](#cargo-run)
+  - [Build](#build)
 - [Contribution](#contribution)
 - [LICENSE](#license)
 
@@ -33,6 +38,9 @@ This tools is just in **BETA** mode. It's working fine and you can download all 
 # Installation
 
 TO DO: provide automated pipelines to generate binaries with ARM&AMD binaries to `github releases`. Provide formula for brew mac users, and more!
+
+## Pre-commit
+[pre-commit](./docs/pre-commit.md)
 
 # Usage
 
