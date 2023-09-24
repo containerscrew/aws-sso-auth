@@ -89,11 +89,14 @@ Type `aws-profile` in your terminal, and you will see all the accounts you have 
 * Logging with env_logger (aws_config it's printing some unnecessary info)
 > https://docs.aws.amazon.com/sdk-for-rust/latest/dg/logging.html
 > https://github.com/awslabs/aws-sdk-rust/discussions/771
-* Speed credentials download with `async` + `tokio:spawn` threading. The current code is not as fast as I would like
 * Code refactoring
 * Github actions pipeline to create binary and push to `releases`
 * Testing
 * Imagine you have 600 accounts with access in your AWS SSO portal, but you only want to fetch 100. How you can limit that?
+
+* Speed credentials download with `async` + `tokio:spawn` threading. The current code is not as fast as I would like.
+Avoid this problem: limit number of threads
+> thread 'tokio-runtime-worker' panicked at 'Can't get account credentials: TooManyRequestsException(TooManyRequestsException { message: Some("HTTP 429 Unknown Code")
 
 # Developing
 
