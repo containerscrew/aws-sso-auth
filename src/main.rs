@@ -6,8 +6,18 @@ mod utils;
 
 mod argparse;
 
-#[tokio::main(flavor = "multi_thread", worker_threads = 10)]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
+fn main() ->  Result<(), Box<dyn std::error::Error>> {
+    tokio::runtime::Builder::new_multi_thread()
+        .worker_threads(1)
+        .enable_all()
+        .thread_name("testing")
+        .build()
+        .unwrap()
+        .block_on(async_main())
+}
+
+
+async fn async_main() -> Result<(), Box<dyn std::error::Error>> {
     // Logging
     env_logger::Builder::from_env(Env::default().default_filter_or("error")).init();
 
