@@ -24,7 +24,7 @@ pub struct AccountCredentials {
     pub aws_session_token: String,
 }
 
-pub async fn init_config(region: &String) -> SdkConfig {
+pub async fn init_config(_region: &String) -> SdkConfig {
     let region_provider = aws_config::meta::region::RegionProviderChain::default_provider().or_else("eu-west-1");
 
     aws_config::from_env().region(region_provider).load().await

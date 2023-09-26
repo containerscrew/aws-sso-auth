@@ -1,13 +1,26 @@
+use std::time::Instant;
 use env_logger::{Env};
 use current_platform::{COMPILED_ON, CURRENT_PLATFORM};
+use tokio::runtime::Builder;
 
 mod lib;
 mod utils;
 
 mod argparse;
 
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
+fn main() ->  Result<(), Box<dyn std::error::Error>> {
+    tokio::runtime::Builder::new_multi_thread()
+        .worker_threads(1)
+        .max_blocking_threads(1)
+        .enable_time()
+        .enable_io()
+        .thread_name("testing")
+        .build()
+        .unwrap()
+        .block_on(async_main())
+}
+
+async fn async_main() -> Result<(), Box<dyn std::error::Error>> {
     // Logging
     env_logger::Builder::from_env(Env::default().default_filter_or("error")).init();
 
@@ -45,19 +58,37 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Get account list using the previous generate token
     let account_list = lib::get_account_list(&sso_client, &token).await.expect("Can't get account list");
 
-    // Create a vector with all credentials
     let mut all_credentials: Vec<lib::AccountCredentials>  = vec![];
 
-    //Start getting credentials for each account/role
-    for account in account_list {
-        let account_name = &account.account_name.unwrap();
-        println!("Fetching credentials for {}", &account_name);
-        let account_credentials = lib::get_account_credentials(&sso_client,&account.account_id.unwrap(), &token, &account_name).await.expect("Can't get account credentials");
-        all_credentials.extend(account_credentials)
+    let start = Instant::now();
+
+    let tasks:Vec <_> = account_list
+        .into_iter()
+        .map(|account| {
+            let sso_client = sso_client.clone(); // Clone the sso_client
+            let token = token.clone(); // Clone the token
+            tokio::spawn(async move {
+                let account_name = &account.account_name.unwrap();
+                println!("Fetching credentials for {}", &account_name);
+                let account_credentials = lib::get_account_credentials(
+                    &sso_client,
+                    &account.account_id.unwrap(),
+                    &token,
+                    &account_name)
+                    .await.expect("Can't get account credentials");
+                account_credentials
+            })
+        })
+        .collect();
+
+    for task in tasks {
+        let account_credential = task.await.unwrap();
+        all_credentials.extend(account_credential);
     }
 
     println!("Writing data to file");
     utils::write_configuration(all_credentials);
 
+    println!("Credentials downloaded in {:?}s", start.elapsed().as_secs());
     Ok(())
 }
