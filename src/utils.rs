@@ -11,7 +11,7 @@ pub fn open_browser_url(url: &String) {
 }
 
 pub fn read_user_input() {
-    println!("Type ENTER to continue...");
+    print!("Type ENTER to continue...");
     let mut user_input = String::new();
     let stdin = io::stdin();
     stdin.read_line(&mut user_input).unwrap();
