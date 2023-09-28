@@ -2,34 +2,36 @@ name: Release 📦
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - "*"
     tags:
-      - '*'
-
-permissions:
-  contents: write
+      - 'v*.*.*'
 
 jobs:
-  release:
-    name: release ${{ matrix.target }}
-    runs-on: ubuntu-latest
+  build:
     strategy:
-      fail-fast: false
       matrix:
-        include:
-#          - target: x86_64-pc-windows-gnu
-#            archive: zip
-#          - target: x86_64-unknown-linux-musl
-#            archive: tar.gz tar.xz tar.zst
-          - target: x86_64-apple-darwin
-            archive: zip
+        os: [macOS-latest]
+        rust: [stable]
+
+    runs-on: ${{ matrix.os }}
+
     steps:
-      - uses: actions/checkout@master
-      - name: Compile and release
-        uses: rust-build/rust-build.action@v1.4.3
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@v1
+        with:
+          toolchain: ${{ matrix.rust }}
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build for macOS
+        if: matrix.os == 'macOS-latest'
+        run: make release_mac
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body: '[Changelog](https://github.com/containerscrew/aws-sso-rs/blob/main/CHANGELOG.md)'
+          files: "*.zip\n*.rpm"
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-        with:
-          TOOLCHAIN_VERSION: stable
-          RUSTTARGET: ${{ matrix.target }}
-          ARCHIVE_TYPES: ${{ matrix.archive }}
