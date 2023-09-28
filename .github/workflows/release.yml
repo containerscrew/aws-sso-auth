@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - "*"
-    tags:
-      - 'v*.*.*'
+#    tags:
+#      - 'v*.*.*'
 
 jobs:
   build:
@@ -13,9 +13,7 @@ jobs:
       matrix:
         os: [macOS-latest]
         rust: [stable]
-
     runs-on: ${{ matrix.os }}
-
     steps:
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@v1
