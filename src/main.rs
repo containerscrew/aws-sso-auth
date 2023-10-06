@@ -1,7 +1,6 @@
 use std::time::Instant;
 use env_logger::{Env};
 use current_platform::{COMPILED_ON, CURRENT_PLATFORM};
-use tokio::runtime::Builder;
 
 mod lib;
 mod utils;
@@ -10,11 +9,11 @@ mod argparse;
 
 fn main() ->  Result<(), Box<dyn std::error::Error>> {
     tokio::runtime::Builder::new_multi_thread()
-        .worker_threads(1)
-        .max_blocking_threads(1)
+        .worker_threads(5)
+        //.max_blocking_threads(1)
         .enable_time()
         .enable_io()
-        .thread_name("testing")
+        .thread_name("aws-sso-rs")
         .build()
         .unwrap()
         .block_on(async_main())
@@ -62,27 +61,30 @@ async fn async_main() -> Result<(), Box<dyn std::error::Error>> {
 
     let start = Instant::now();
 
-    let tasks:Vec <_> = account_list
-        .into_iter()
-        .map(|account| {
-            let sso_client = sso_client.clone(); // Clone the sso_client
-            let token = token.clone(); // Clone the token
-            tokio::spawn(async move {
-                let account_name = &account.account_name.unwrap();
-                println!("Fetching credentials for {}", &account_name);
-                let account_credentials = lib::get_account_credentials(
-                    &sso_client,
-                    &account.account_id.unwrap(),
-                    &token,
-                    &account_name)
-                    .await.expect("Can't get account credentials");
-                account_credentials
-            })
-        })
-        .collect();
+    let semaphore = std::sync::Arc::new(tokio::sync::Semaphore::new(cli.workers));
+    let mut join_handles = Vec::new();
 
-    for task in tasks {
-        let account_credential = task.await.unwrap();
+    for account in account_list {
+        let permit = semaphore.clone().acquire_owned().await.unwrap();
+        let sso_client = sso_client.clone();
+        let token = token.clone();
+
+        join_handles.push(tokio::spawn(async move {
+            let account_name = &account.account_name.unwrap();
+            let account_credentials = lib::get_account_credentials(
+                &sso_client,
+                &account.account_id.unwrap(),
+                &token,
+                &account_name)
+                .await.expect("Can't get account credentials");
+            drop(permit);
+            return account_credentials;
+
+        }));
+    }
+
+    for handle in join_handles {
+        let account_credential = handle.await.unwrap();
         all_credentials.extend(account_credential);
     }
 

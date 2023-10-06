@@ -114,5 +114,7 @@ pub async fn get_account_credentials(client: &sso::client::Client, account_id: &
         })
     }
 
+    println!("Credentials fetched for: {}", &account_name);
+
     Ok(account_credentials)
 }

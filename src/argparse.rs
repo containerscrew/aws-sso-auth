@@ -6,6 +6,8 @@ pub struct Cli {
     pub region: String,
     #[arg(short, long, help = "AWS SSO start url")]
     pub start_url: String,
+    #[arg(short, long, help = "Max number of workers (spawned tasks/threads)")]
+    pub workers: usize,
     // #[arg(short, long, help = "Log level: error, warn, info, debug , trace", default_value="warn")]
     // pub log_level: String,
     // #[command(subcommand)]
