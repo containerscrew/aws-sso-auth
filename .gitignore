@@ -16,3 +16,7 @@ Cargo.lock
 # Jetbrains
 *.iml
 .idea/
+
+
+# Test json config files
+*.test.json

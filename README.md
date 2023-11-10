@@ -75,6 +75,12 @@ aws-profile () {
 }
 ```
 
+# Fish shell
+
+```shell
+TO DO 
+```
+
 Then, `source` the file if needed:
 ```shell
 source ~/.zshrc or source ~/.bashrc
@@ -126,6 +132,10 @@ cargo run --start-url https://XXXXXX.awsapps.com/start --region eu-west-1
 ```bash
 cargo build --release # --release flag for production environment, without --release flag for testing
 ```
+# TO DO (not implemented yet)
+
+* Multiple AWS SSO account configurations inside `aws-sso-auth.json` Imagine you are working in a consultant, and you have multiple customers with AWS SSO, and you want to save
+all their config (start-url, region) inside the config file.
 
 
 # Contribution
