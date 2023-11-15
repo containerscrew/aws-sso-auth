@@ -2,9 +2,14 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
     hooks:
-      - id: check-merge-conflict
-      - id: end-of-file-fixer
-      - id: trailing-whitespace
+      -  id: check-byte-order-marker
+      -  id: check-case-conflict
+      -  id: check-merge-conflict
+      -  id: check-symlinks
+      -  id: check-yaml
+      -  id: end-of-file-fixer
+      -  id: mixed-line-ending
+      -  id: trailing-whitespace
   - repo: https://github.com/thlorenz/doctoc
     rev: v2.2.0
     hooks:
@@ -13,3 +18,13 @@ repos:
     rev: v8.16.1
     hooks:
       - id: gitleaks
+  - repo: https://github.com/pre-commit/pre-commit
+    rev: v2.5.1
+    hooks:
+    -   id: validate_manifest
+  - repo: https://github.com/doublify/pre-commit-rust
+    rev: master
+    hooks:
+      # - id: fmt
+      #   args: ['--verbose', '--']
+      - id: cargo-check

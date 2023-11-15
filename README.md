@@ -17,12 +17,14 @@
   - [Pre-commit](#pre-commit)
 - [Usage](#usage)
   - [Switching accounts](#switching-accounts)
+- [Fish shell](#fish-shell)
 - [TO DO](#to-do)
 - [Developing](#developing)
   - [Requirements](#requirements)
   - [Clone](#clone)
   - [Cargo run](#cargo-run)
   - [Build](#build)
+- [TO DO (not implemented yet)](#to-do-not-implemented-yet)
 - [Contribution](#contribution)
 - [LICENSE](#license)
 
@@ -73,6 +75,12 @@ aws-profile () {
         PROFILE=$(cat ~/.aws/credentials|grep "^\["|sed "s/]$//"|sed "s/^\[//"| fzf)
         export AWS_PROFILE=$PROFILE
 }
+```
+
+# Fish shell
+
+```shell
+TO DO
 ```
 
 Then, `source` the file if needed:
@@ -126,7 +134,16 @@ cargo run --start-url https://XXXXXX.awsapps.com/start --region eu-west-1
 ```bash
 cargo build --release # --release flag for production environment, without --release flag for testing
 ```
+# TO DO (not implemented yet)
 
+* Multiple AWS SSO account configurations inside `aws-sso-auth.json` Imagine you are working in a consultant, and you have multiple customers with AWS SSO, and you want to save
+all their config (start-url, region) inside the config file.
+* If you have 200 accounts, only 123 (max), will be fetched
+* Select which account credentials (with prefix) do you want to fetch.
+* Remove
+* Testing
+* In console output, exists and empty new line when after info message `Type ENTER to continue`. Need to flush console
+* Implement multiple retries when you have 429 errors in API calls
 
 # Contribution
 
