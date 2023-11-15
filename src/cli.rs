@@ -1,10 +1,8 @@
-use std::os::unix::prelude::PermissionsExt;
-
-use crate::commands::config;
-use crate::commands::config::{Configuration, CONFIG_FILE_PATH};
-use crate::utils::config_file_exists;
+use crate::commands::config::read_config_file;
+use crate::commands::config::Configuration;
+use crate::commands::start::start;
 use clap::{Parser, Subcommand};
-use tracing::info;
+use std::error::Error;
 
 #[derive(Parser)]
 #[clap(
@@ -49,21 +47,26 @@ enum Commands {
     /// Start fetching your AWS credentials
     Start {
         #[arg(
-            short = 'l',
-            long = "log-level",
-            help = "Log level. Print all info when you download credentials!",
-            default_value = "info",
+            short = 'w',
+            long = "workers",
+            help = "Number of threads! Recommended: 2/3 max to avoid AWS API 429 errors TooManyRequestsException",
+            default_value = "2",
             required = false
         )]
-        log_level: String,
+        workers: usize,
+        #[arg(
+            short = 'r',
+            long = "retries",
+            help = "Number of retries when you have AWS API errors",
+            default_value = "5",
+            required = false
+        )]
+        retries: u32,
     },
 }
 
-pub fn argparse() -> Cli {
+pub fn argparse() -> Result<Cli, Box<dyn Error>> {
     let cli = Cli::parse();
-
-    // Provide some validations with some flags
-    // TO DO
 
     match &cli.command {
         Some(Commands::Config {
@@ -80,15 +83,21 @@ pub fn argparse() -> Cli {
             // Write configuration
             config.write_config_file();
         }
-        Some(Commands::Start { log_level }) => {
-            // Check if config file exists
-            config_file_exists(CONFIG_FILE_PATH);
+        Some(Commands::Start { workers, retries }) => {
+            // Read and deserialize data from config file
+            let config_params = read_config_file();
 
-            // Read data from file
+            // Start AWS SDK API CALLS with tokio runtime builder
+            start(
+                config_params.parameters.aws_region,
+                config_params.parameters.start_url,
+                *workers,
+                *retries,
+            )
         }
         None => {}
     }
 
     // Return cli
-    cli
+    Ok(cli)
 }

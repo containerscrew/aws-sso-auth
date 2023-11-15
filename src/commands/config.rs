@@ -2,21 +2,23 @@ use crate::utils::extend_path;
 use serde::{Deserialize, Serialize};
 use std::fs::{File, OpenOptions};
 use std::io::{BufRead, Write};
+use std::process::exit;
 use std::{fs, io};
 use tracing::{error, info};
 
 // The name of the file and directory for the configuration will not be custom by the moment
 pub const CONFIG_FILE_PATH: &str = "~/.aws/aws-sso-auth.json";
+pub const CREDENTIALS_FILE_PATH: &str = "~/.aws/credentials";
 
 #[derive(Serialize, Deserialize, PartialEq, Eq, Hash, Debug)]
 pub struct Configuration {
     profile_name: String,
-    parameters: Parameters,
+    pub parameters: Parameters,
 }
 #[derive(Serialize, Deserialize, PartialEq, Eq, Hash, Debug)]
-struct Parameters {
-    start_url: String,
-    aws_region: String,
+pub struct Parameters {
+    pub start_url: String,
+    pub aws_region: String,
 }
 
 impl Configuration {
@@ -43,7 +45,7 @@ impl Configuration {
             Ok(file) => file,
             Err(err) => {
                 error!("Can't create configuration file. {}", err);
-                std::process::exit(1);
+                exit(1);
             }
         };
 
@@ -66,10 +68,27 @@ impl Configuration {
     }
 }
 
-// pub fn read_config_file()  {
-//     let file = OpenOptions::new()
-//         .read(true)
-//         .open(extend_path(CONFIG_FILE_PATH)).expect_err("Can't open config file");
+pub fn read_config_file() -> Configuration {
+    let file = match OpenOptions::new()
+        .read(true)
+        .open(extend_path(CONFIG_FILE_PATH))
+    {
+        Ok(file) => file,
+        Err(err) => {
+            error!("Can't open configuration file. {}", err);
+            error!("Maybe your configuration file don't exists. Create new one with $ aws-sso-auth config subcommand or type $ aws-sso-auth --help");
+            exit(1);
+        }
+    };
 
-//     let config: Configuration = serde_json::from_reader(file).expect("No puedo serializar la data!!");
-// }
+    let config: Configuration = match serde_json::from_reader(file) {
+        Ok(config) => config,
+        Err(err) => {
+            error!("Can't deserialize data {}", err);
+            error!("Take a look in ~/.aws/aws-sso-auth.json");
+            exit(1);
+        }
+    };
+
+    config
+}

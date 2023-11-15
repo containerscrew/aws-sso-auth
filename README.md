@@ -138,7 +138,12 @@ cargo build --release # --release flag for production environment, without --rel
 
 * Multiple AWS SSO account configurations inside `aws-sso-auth.json` Imagine you are working in a consultant, and you have multiple customers with AWS SSO, and you want to save
 all their config (start-url, region) inside the config file.
-
+* If you have 200 accounts, only 123 (max), will be fetched
+* Select which account credentials (with prefix) do you want to fetch.
+* Remove
+* Testing
+* In console output, exists and empty new line when after info message `Type ENTER to continue`. Need to flush console
+* Implement multiple retries when you have 429 errors in API calls
 
 # Contribution
 
