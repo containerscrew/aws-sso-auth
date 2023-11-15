@@ -1,9 +1,9 @@
-use std::{fs, io};
+use crate::utils::extend_path;
+use serde::{Deserialize, Serialize};
 use std::fs::{File, OpenOptions};
 use std::io::{BufRead, Write};
-use serde::{Deserialize, Serialize};
-use tracing::info;
-use crate::utils::extend_path;
+use std::{fs, io};
+use tracing::{error, info};
 
 // The name of the file and directory for the configuration will not be custom by the moment
 pub const CONFIG_FILE_PATH: &str = "~/.aws/aws-sso-auth.json";
@@ -11,19 +11,22 @@ pub const CONFIG_FILE_PATH: &str = "~/.aws/aws-sso-auth.json";
 #[derive(Serialize, Deserialize, PartialEq, Eq, Hash, Debug)]
 pub struct Configuration {
     profile_name: String,
-    parameters: Parameters
+    parameters: Parameters,
 }
-#[derive(Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Serialize, Deserialize, PartialEq, Eq, Hash, Debug)]
 struct Parameters {
     start_url: String,
     aws_region: String,
 }
 
-impl Configuration{
+impl Configuration {
     pub fn new(start_url: String, aws_region: String, profile_name: String) -> Self {
         Self {
             profile_name,
-            parameters: Parameters { start_url, aws_region },
+            parameters: Parameters {
+                start_url,
+                aws_region,
+            },
         }
     }
 
@@ -31,10 +34,18 @@ impl Configuration{
     // TO DO: allow multiple profiles with different AWS accounts
     // TO DO: if you append to the config file with different configurations, implement the possibility of update existing configuration
     pub fn write_config_file(&self) {
-        let file = OpenOptions::new()
+        let file = match OpenOptions::new()
             .write(true)
             .create(true)
-            .open(extend_path(CONFIG_FILE_PATH)).expect("Can't open config file");
+            .truncate(true)
+            .open(extend_path(CONFIG_FILE_PATH))
+        {
+            Ok(file) => file,
+            Err(err) => {
+                error!("Can't create configuration file. {}", err);
+                std::process::exit(1);
+            }
+        };
 
         let config = Configuration {
             profile_name: self.profile_name.to_string(),
@@ -44,16 +55,21 @@ impl Configuration{
             },
         };
 
-        serde_json::to_writer(file, &config).expect("Can't write config file!");
+        match serde_json::to_writer(file, &config) {
+            Ok(_) => {
+                info!("Configuration file saved!");
+            }
+            Err(err) => {
+                error!("Can't write configuration file. {}", err)
+            }
+        }
     }
 }
 
-pub fn read_config_file()  {
-    let file = OpenOptions::new()
-        .read(true)
-        .open(extend_path(CONFIG_FILE_PATH)).expect_err("Can't open config file");
+// pub fn read_config_file()  {
+//     let file = OpenOptions::new()
+//         .read(true)
+//         .open(extend_path(CONFIG_FILE_PATH)).expect_err("Can't open config file");
 
-    let config: Configuration = serde_json::from_reader(&file).expect("No puedo serializar la data!!");
-
-    println!("{:?}", config);
-}
+//     let config: Configuration = serde_json::from_reader(file).expect("No puedo serializar la data!!");
+// }

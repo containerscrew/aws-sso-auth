@@ -1,13 +1,16 @@
-use crate::utils::{print_banner};
+use current_platform::{COMPILED_ON, CURRENT_PLATFORM};
+use tracing::info;
+
+use crate::utils::print_banner;
 
 mod utils;
 
 mod cli;
 
-mod config;
 mod commands;
+mod config;
 
-fn main() ->  Result<(), Box<dyn std::error::Error>> {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     tokio::runtime::Builder::new_multi_thread()
         .worker_threads(3) // more threads can't provide AWS API 429 responses
         .enable_time()
@@ -29,7 +32,7 @@ async fn async_main() -> Result<(), Box<dyn std::error::Error>> {
         .init();
 
     // Platform information
-    //info!(platform = CURRENT_PLATFORM, compiled_on= COMPILED_ON);
+    info!(platform = CURRENT_PLATFORM, compiled_on = COMPILED_ON);
 
     // Command line flags
     cli::argparse();

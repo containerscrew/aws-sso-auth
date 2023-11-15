@@ -1,9 +1,8 @@
-use std::{io};
-use std::fs::File;
-use std::path::Path;
 use colored::Colorize;
 use log::{error, info};
-
+use std::fs::File;
+use std::io;
+use std::path::Path;
 
 pub fn print_banner() {
     let banner = r#"
@@ -24,7 +23,9 @@ pub fn open_browser_url(url: &String) {
     // From the device authorization, open the URL in the browser
     if webbrowser::open(&*url).is_ok() {
         info!("Web browser opened correctly!")
-    } else { error!("Problems with WebBrowser") }
+    } else {
+        error!("Problems with WebBrowser")
+    }
 }
 
 pub fn read_user_input() {
@@ -42,12 +43,12 @@ pub fn config_file_exists(path: &str) {
 
     match directory_path.metadata() {
         Ok(metadata) => {
-            if metadata.is_file(){
+            if metadata.is_file() {
                 info!("Config file exists: {}", &path);
             }
-        },
+        }
         Err(_) => {
-            info!("Config file don't exists {}.", &expanded_path);
+            error!("Config file don't exists {}.", &expanded_path);
             // If config file don't exists, try to create a new one
             // match File::create(&expanded_path) {
             //     Ok(_) => info!("File {} created", &expanded_path),
@@ -60,7 +61,6 @@ pub fn config_file_exists(path: &str) {
 pub fn extend_path(path: &str) -> String {
     shellexpand::tilde(path).to_string()
 }
-
 
 // pub fn write_configuration(all_credentials: Vec<AccountCredentials>) {
 //     //Start configparser to write data

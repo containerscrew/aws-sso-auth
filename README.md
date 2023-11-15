@@ -17,12 +17,14 @@
   - [Pre-commit](#pre-commit)
 - [Usage](#usage)
   - [Switching accounts](#switching-accounts)
+- [Fish shell](#fish-shell)
 - [TO DO](#to-do)
 - [Developing](#developing)
   - [Requirements](#requirements)
   - [Clone](#clone)
   - [Cargo run](#cargo-run)
   - [Build](#build)
+- [TO DO (not implemented yet)](#to-do-not-implemented-yet)
 - [Contribution](#contribution)
 - [LICENSE](#license)
 
@@ -78,7 +80,7 @@ aws-profile () {
 # Fish shell
 
 ```shell
-TO DO 
+TO DO
 ```
 
 Then, `source` the file if needed:

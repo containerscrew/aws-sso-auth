@@ -1,10 +1,9 @@
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::fs::File;
 use std::io;
 use std::io::{Read, Write};
 use std::path::Path;
-use serde::{Deserialize, Serialize};
-
 
 // fn read_json_file(file_path: &str) -> io::Result<HashMap<Profile, i32>> {
 //     let mut file = File::open(file_path)?;
