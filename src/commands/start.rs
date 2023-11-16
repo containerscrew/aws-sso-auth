@@ -68,11 +68,13 @@ pub async fn async_start(
     let account_list = get_account_list(&sso_client, &token).await?;
 
     // Provide info about all account that should be downloaded
-    info!("{} accounts to fetch", account_list.len());
+    info!("{} accounts to fetch. Each account can have multiple roles", account_list.len());
 
     let mut all_credentials: Vec<AccountCredentials> = vec![];
 
+    // Semaphore will control the number of concurrent threads
     let semaphore = std::sync::Arc::new(tokio::sync::Semaphore::new(workers));
+
     let mut join_handles = Vec::new();
 
     // Start fetching credentials for all account/account-role
@@ -82,7 +84,6 @@ pub async fn async_start(
         let token = token.clone();
 
         join_handles.push(tokio::spawn(async move {
-            let mut retries = 0;
             let account_name = &account.account_name.unwrap();
             let account_credentials = match get_account_credentials(
                 &sso_client,
