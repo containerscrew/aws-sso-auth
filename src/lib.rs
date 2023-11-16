@@ -36,9 +36,7 @@ pub async fn init_config(region: String) -> SdkConfig {
 }
 
 pub async fn ssoidc_client(config: &SdkConfig, retries: u32) -> Client {
-    // Construct an S3 client with customized retry configuration.
     Client::from_conf(
-        // Start with the shared environment configuration.
         config::Builder::from(config)
             .retry_config(RetryConfig::standard().with_max_attempts(retries))
             .build(),
@@ -47,7 +45,6 @@ pub async fn ssoidc_client(config: &SdkConfig, retries: u32) -> Client {
 
 pub async fn sso_client(config: &SdkConfig, retries: u32) -> sso::Client {
     sso::Client::from_conf(
-        // Start with the shared environment configuration.
         sso::config::Builder::from(config)
             .retry_config(RetryConfig::standard().with_max_attempts(retries))
             .build(),

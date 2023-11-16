@@ -1,10 +1,12 @@
+use std::fs::{File, OpenOptions};
 use crate::commands::config::{CONFIG_FILE_PATH, CREDENTIALS_FILE_PATH};
 use aws_sso_auth::AccountCredentials;
 use colored::Colorize;
 use configparser::ini::Ini;
 use log::{error, info};
 use std::io;
-use std::io::Write;
+use std::io::{Read, Write};
+use std::process::exit;
 
 pub fn print_banner() {
     let banner = r#"
@@ -38,29 +40,6 @@ pub fn read_user_input() {
         .expect("Error reading enter key!");
 }
 
-// pub fn config_file_exists(path: &str) {
-//     // This function checks if config file ~/.aws/aws-sso-auth.json exists
-//     // If not, will try to create a new one
-//     let expanded_path = extend_path(path);
-//     let directory_path = Path::new(&expanded_path);
-
-//     match directory_path.metadata() {
-//         Ok(metadata) => {
-//             if metadata.is_file() {
-//                 info!("Config file exists: {}", &path);
-//             }
-//         }
-//         Err(_) => {
-//             error!("Config file don't exists {}.", &expanded_path);
-//             // If config file don't exists, try to create a new one
-//             // match File::create(&expanded_path) {
-//             //     Ok(_) => info!("File {} created", &expanded_path),
-//             //     Err(err) => error!("Can't create file. {}", err),
-//             // }
-//         }
-//     }
-// }
-
 pub fn extend_path(path: &str) -> String {
     shellexpand::tilde(path).to_string()
 }
@@ -68,6 +47,7 @@ pub fn extend_path(path: &str) -> String {
 pub fn write_configuration(all_credentials: Vec<AccountCredentials>, region_name: String) {
     //Start configparser to write data
     let mut configuration = Ini::new_cs();
+    let file_path = extend_path(CREDENTIALS_FILE_PATH);
 
     for creds in all_credentials {
         configuration.set(
@@ -91,11 +71,35 @@ pub fn write_configuration(all_credentials: Vec<AccountCredentials>, region_name
             Option::from(creds.aws_session_token),
         );
 
-        match configuration.write(extend_path((CREDENTIALS_FILE_PATH))) {
-            Ok(_) => {},
+        match configuration.write(&file_path) {
+            Ok(_) => {}
             Err(err) => error!("Error writing configuration file {}", err),
         };
     }
 
     info!("Configuration file saved!")
 }
+
+
+// pub fn config_file_exists(path: &str) {
+//     // This function checks if config file ~/.aws/aws-sso-auth.json exists
+//     // If not, will try to create a new one
+//     let expanded_path = extend_path(path);
+//     let directory_path = Path::new(&expanded_path);
+
+//     match directory_path.metadata() {
+//         Ok(metadata) => {
+//             if metadata.is_file() {
+//                 info!("Config file exists: {}", &path);
+//             }
+//         }
+//         Err(_) => {
+//             error!("Config file don't exists {}.", &expanded_path);
+//             // If config file don't exists, try to create a new one
+//             // match File::create(&expanded_path) {
+//             //     Ok(_) => info!("File {} created", &expanded_path),
+//             //     Err(err) => error!("Can't create file. {}", err),
+//             // }
+//         }
+//     }
+// }

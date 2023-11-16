@@ -9,15 +9,10 @@ mod cli;
 
 mod commands;
 
+mod logger;
 fn main() {
     // Default banner
     print_banner();
-
-    // Initialize global logging
-    tracing_subscriber::fmt()
-        .with_thread_names(true)
-        .with_max_level(tracing::Level::INFO)
-        .init();
 
     // Platform information
     info!(

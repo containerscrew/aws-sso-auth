@@ -144,6 +144,8 @@ all their config (start-url, region) inside the config file.
 * Testing
 * In console output, exists and empty new line when after info message `Type ENTER to continue`. Need to flush console
 * Implement multiple retries when you have 429 errors in API calls
+* Overwrite `~/.aws/credentials` file every time you fetch account credentials
+* Create function to open file
 
 # Contribution
 

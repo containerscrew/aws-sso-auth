@@ -22,3 +22,6 @@ pre-commit: ## Run pre-commit
 release_mac: ## Start release for Mac OSX
 	cargo build --release --target=x86_64-apple-darwin
 	zip -j ${BIN_NAME}-v${VERSION}-x86_64-mac.zip target/x86_64-apple-darwin/release/${BIN_NAME}
+
+run: ## Cargo run --release
+	cargo run --release

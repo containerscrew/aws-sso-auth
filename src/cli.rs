@@ -1,6 +1,7 @@
 use crate::commands::config::read_config_file;
 use crate::commands::config::Configuration;
 use crate::commands::start::start;
+use crate::logger::setup_logger;
 use clap::{Parser, Subcommand};
 use std::error::Error;
 
@@ -15,6 +16,14 @@ use std::error::Error;
 pub struct Cli {
     #[command(subcommand)]
     command: Option<Commands>,
+    #[arg(
+        short = 'l',
+        long = "log-level",
+        help = "Log level for logging tracing. Default: info",
+        default_value = "info",
+        required = false
+    )]
+    log_level: String,
 }
 
 #[derive(Subcommand)]
@@ -39,7 +48,7 @@ enum Commands {
         #[arg(
             short = 'p',
             long = "profile-name",
-            help = "The name with which you want to save the configuration",
+            help = "The name with which you want to save the configuration. Your company name for example.",
             required = true
         )]
         profile_name: String,
@@ -50,7 +59,7 @@ enum Commands {
             short = 'w',
             long = "workers",
             help = "Number of threads! Recommended: 2/3 max to avoid AWS API 429 errors TooManyRequestsException",
-            default_value = "2",
+            default_value = "5",
             required = false
         )]
         workers: usize,
@@ -58,7 +67,7 @@ enum Commands {
             short = 'r',
             long = "retries",
             help = "Number of retries when you have AWS API errors",
-            default_value = "5",
+            default_value = "30",
             required = false
         )]
         retries: u32,
@@ -74,6 +83,9 @@ pub fn argparse() -> Result<Cli, Box<dyn Error>> {
             aws_region,
             profile_name,
         }) => {
+            // Logging
+            setup_logger(&cli.log_level);
+
             let config: Configuration = Configuration::new(
                 start_url.to_string(),
                 aws_region.to_string(),
@@ -84,6 +96,9 @@ pub fn argparse() -> Result<Cli, Box<dyn Error>> {
             config.write_config_file();
         }
         Some(Commands::Start { workers, retries }) => {
+            // Logging
+            setup_logger(&cli.log_level);
+
             // Read and deserialize data from config file
             let config_params = read_config_file();
 
