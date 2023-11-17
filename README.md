@@ -6,7 +6,9 @@
 </p>
 
 <p align="center" >
-    <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/containerscrew/aws-sso-auth">
+    <a href="#">
+      <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/containerscrew/aws-sso-auth">
+    </a>
     <a href="/LICENSE">
       <img alt="License" src="https://img.shields.io/github/license/containerscrew/aws-sso-auth">
     </a>
