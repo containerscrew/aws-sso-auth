@@ -31,12 +31,11 @@
 - [Pipeline badges](#pipeline-badges)
 - [Introduction](#introduction)
 - [Installation](#installation)
-  - [Pre-commit](#pre-commit)
 - [Usage](#usage)
-  - [Switching accounts](#switching-accounts)
+  - [Switching accounts in your terminal](#switching-accounts-in-your-terminal)
 - [Fish shell](#fish-shell)
+  - [Setting AWS_PROFILE](#setting-aws_profile)
 - [TO DO](#to-do)
-  - [Build](#build)
 - [TO DO (not implemented yet)](#to-do-not-implemented-yet)
 - [Contribution](#contribution)
 - [LICENSE](#license)
@@ -58,10 +57,6 @@
 ...TO DO
 
 
-
-## Pre-commit
-[pre-commit](./docs/pre-commit.md)
-
 # Usage
 
 ```bash
@@ -73,9 +68,9 @@ aws-sso-auth --start-url https://XXXXXX.awsapps.com/start --region eu-west-1
 
 > All the credentials will be saved in your $HOME/.aws/credentials with the following pattern: [AccountName@RoleName] you are assuming
 
-## Switching accounts
+## Switching accounts in your terminal
 
-Copy the following function in your `.zshrc` or `.bashrc`:
+Copy the following function in your `~/.zshrc` or `~/.bashrc`:
 
 ```shell
 aws-profile () {
@@ -84,20 +79,40 @@ aws-profile () {
 }
 ```
 
-# Fish shell
-
-```shell
-TO DO
-```
-
 Then, `source` the file if needed:
 ```shell
 source ~/.zshrc or source ~/.bashrc
 ```
 
+# Fish shell
+
+Copy the following function inside `~/.config/fish/function/aws-profile.fish`
+
+```shell
+function aws-profile
+    set -Ux AWS_PROFILES $(cat ~/.aws/credentials | sed -n -e 's/^\[\(.*\)\]/\1/p' | fzf)
+    if test -n "$AWS_PROFILES"
+        set -xg AWS_PROFILE $AWS_PROFILES
+        echo "Selected profile: $AWS_PROFILES"
+    else
+        echo "No profile selected"
+    end
+end
+```
+
+Then `source` the fish configuration:
+
+```shell
+source ~/.config/fish/config.fish
+```
+
+## Setting AWS_PROFILE
+
 Type `aws-profile` in your terminal, and you will see all the accounts you have credentials in your `$HOME/.aws/credentials`
 
 > **fzf** is needed as a dependency for the interactive account switcher
+
+[Official documentation](https://github.com/junegunn/fzf#installation)
 
 # TO DO
 
@@ -106,11 +121,7 @@ Type `aws-profile` in your terminal, and you will see all the accounts you have 
 * Testing
 * Imagine you have 600 accounts with access in your AWS SSO portal, but you only want to fetch 100. How you can limit that?
 
-## Build
 
-```bash
-cargo build --release # --release flag for production environment, without --release flag for testing
-```
 # TO DO (not implemented yet)
 
 * Multiple AWS SSO account configurations inside `aws-sso-auth.json` Imagine you are working in a consultant, and you have multiple customers with AWS SSO, and you want to save
@@ -123,6 +134,8 @@ all their config (start-url, region) inside the config file.
 * Implement multiple retries when you have 429 errors in API calls
 * Overwrite `~/.aws/credentials` file every time you fetch account credentials
 * Create function to open file
+* Codecoverage pipeline not working
+* Changelog with release-please
 
 # Contribution
 

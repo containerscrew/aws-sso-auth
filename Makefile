@@ -19,4 +19,4 @@ pre-commit: ## Run pre-commit
 	pre-commit run -a
 
 package: ## Package binary with zip
-	zip -j ${BINARY_NAME}-v${VERSION}-$(ARCH).zip target/$(TARGET)/release/${BINARY_NAME}
+	zip -j ${BINARY_NAME}-$(ARCH).zip target/$(TARGET)/release/${BINARY_NAME}
