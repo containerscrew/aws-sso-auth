@@ -7,9 +7,9 @@ rust-version = "1.72.0"
 
 
 [dependencies]
-aws-config = "0.56.1"
-aws-sdk-sso = "0.32.0"
-aws-sdk-ssooidc = "0.32.0"
+aws-config = "0.100.0"
+aws-sdk-sso = "0.37.0"
+aws-sdk-ssooidc = "0.37.0"
 clap = { version = "4.4.4", features = ["derive"] }
 configparser = "3.0.2"
 current_platform = "0.2.0"

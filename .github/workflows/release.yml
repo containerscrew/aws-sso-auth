@@ -2,34 +2,62 @@ name: Release 📦
 
 on:
   push:
-#    branches:
-#      - "*"
     tags:
       - 'v*.*.*'
 
 jobs:
-  build:
+  release:
+    name: Release - ${{ matrix.platform.release_for }}
     strategy:
       matrix:
-        os: [macOS-latest]
-        rust: [stable]
-    runs-on: ${{ matrix.os }}
+        platform:
+          - release_for: linux-arm64
+            os: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+            bin: aws-sso-auth
+            command: build
+
+          - release_for: linux-x86_64
+            os: ubuntu-latest
+            target: x86_64-unknown-linux-musl
+            bin: aws-sso-auth
+            command: build
+
+          - release_for: macOS-x86_64
+            os: macOS-latest
+            target: x86_64-apple-darwin
+            bin: aws-sso-auth
+            command: build
+
+          - release_for: macOS-arm64
+            os: macOS-latest
+            target: aarch64-apple-darwin
+            bin: aws-sso-auth
+            command: build
+
+    runs-on: ${{ matrix.platform.os }}
     steps:
-      - name: Setup Rust
-        uses: dtolnay/rust-toolchain@v1
-        with:
-          toolchain: ${{ matrix.rust }}
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Build for macOS
-        if: matrix.os == 'macOS-latest'
-        run: make release_mac
+      - name: Setup MUSL
+        if: matrix.platform.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get -qq install musl-tools
+      - name: Build binary
+        uses: houseabsolute/actions-rust-cross@v0
+        with:
+          command: ${{ matrix.platform.command }}
+          target: ${{ matrix.platform.target }}
+          args: "--release"
+          strip: true
+      - name: Package zip
+        run: |
+          make package ARCH=${{ matrix.platform.release_for }} TARGET=${{ matrix.platform.target }}
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          body: '[Changelog](https://github.com/containerscrew/aws-sso-rs/blob/main/CHANGELOG.md)'
-          files: "*.zip\n*.rpm"
+          body: '[Changelog](https://github.com/containerscrew/aws-sso-auth/blob/main/CHANGELOG.md)'
+          files: "*.zip"
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
