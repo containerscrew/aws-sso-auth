@@ -38,7 +38,7 @@ happyexit(){
   echo ""
   echo "Now run:"
   echo ""
-  echo "  ${PROJECT} usage"
+  echo "  ${PROJECT} --help"
   echo ""
   exit 0
 }
@@ -98,10 +98,11 @@ download_release() {
   INSTALLATION_PATH="/usr/local/bin/"
   tmpdir=$(mktemp -d)
 
-  cd $tmpdir
+  cd "$tmpdir"
   echo -e "Downloading... ${LATEST_VERSION}/${PROJECT}-${OS}-${cli_arch}.zip \n"
-  curl -L --fail --remote-name-all https://github.com/containerscrew/${PROJECT}/releases/download/"${LATEST_VERSION}"/${PROJECT}-${OS}-${cli_arch}.zip
-  unzip ${PROJECT}-${OS}-${cli_arch}.zip  ${PROJECT}
+  # shellcheck disable=SC2086
+  curl -L --fail --remote-name-all https://github.com/containerscrew/${PROJECT}/releases/download/"${LATEST_VERSION}"/${PROJECT}-"${OS}"-${cli_arch}.zip
+  unzip ${PROJECT}-"${OS}"-"${cli_arch}".zip  ${PROJECT}
 }
 
 # Start install
@@ -110,8 +111,10 @@ download_release
 if [ "$EUID" -ne 0 ]
   then command_exists sudo
     sudo mv ${PROJECT} $INSTALLATION_PATH
+    sudo chown root: /usr/local/bin/${PROJECT}
   else
     mv ${PROJECT} $INSTALLATION_PATH
+    chown root: /usr/local/bin/${PROJECT}
   chmod +x $INSTALLATION_PATH/${PROJECT}
 fi
 
