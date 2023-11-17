@@ -7,8 +7,8 @@
 
 <p align="center" >
     <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/containerscrew/aws-sso-auth">
-    [![License](https://img.shields.io/github/license/containerscrew/aws-sso-auth)](/LICENSE)
-    [![codecov](https://codecov.io/gh/containerscrew/aws-sso-auth/branch/main/graph/badge.svg)](https://codecov.io/gh/containerscrew/aws-sso-auth)
+    <img alt="/LICENSE" src="https://img.shields.io/github/license/containerscrew/aws-sso-auth">
+    <img alt="https://codecov.io/gh/containerscrew/aws-sso-auth/branch/main/graph/badge.svg" src="https://codecov.io/gh/containerscrew/aws-sso-auth">
     [![Release](https://img.shields.io/github/release/containerscrew/aws-sso-rs)](https://github.com/containerscrew/aws-sso-rs/releases/latest)
     [![GitHub Releases Stats](https://img.shields.io/github/downloads/containerscrew/aws-sso-auth/total.svg?logo=github)](https://somsubhra.github.io/github-release-stats/?username=containerscrew&repository=aws-sso-auth)
 </p>
