@@ -46,6 +46,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup MUSL
+        if: matrix.platform.os == "ubuntu-latest"
         run: |
           sudo apt-get -qq install musl-tools
       - name: Build binary
