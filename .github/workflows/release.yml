@@ -1,5 +1,8 @@
 name: Release 📦
 
+permissions:
+  contents: write
+
 on:
   push:
     tags:
@@ -60,4 +63,4 @@ jobs:
           body: '[Changelog](https://github.com/containerscrew/aws-sso-auth/blob/main/CHANGELOG.md)'
           files: "*.zip"
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
