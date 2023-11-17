@@ -13,17 +13,17 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install grcov
         run: |
           curl -L https://github.com/mozilla/grcov/releases/latest/download/grcov-x86_64-unknown-linux-gnu.tar.bz2 | tar jxf -
           sudo mv grcov /usr/local/bin/
 
-      - name: Set up Rust
-        uses: actions/setup-rust@v2
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@v1
         with:
-          rust-version: stable
+          toolchain: stable
 
       - name: Install llvm-tools
         run: rustup component add llvm-tools-preview
