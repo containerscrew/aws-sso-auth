@@ -93,10 +93,10 @@ jobs:
 #        if: matrix.os == 'macOS-latest'
 #        run: make release-mac
 
-#      - name: Release
-#        uses: softprops/action-gh-release@v1
-#        with:
-#          body: '[Changelog](https://github.com/containerscrew/aws-sso-auth/blob/main/CHANGELOG.md)'
-#          files: "*.tar.gz\n*.rpm"
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body: '[Changelog](https://github.com/containerscrew/aws-sso-auth/blob/main/CHANGELOG.md)'
+          files: "*.tar.gz\n*.rpm"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
