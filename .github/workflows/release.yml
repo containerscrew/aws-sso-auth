@@ -13,27 +13,34 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
-        arch: [x64, arm64]
+        os: [ubuntu-latest] #macOS-latest, windows-latest
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      runs-on: ${{ matrix.os }}
 
-      - name: Setup Rust
-        uses: dtolnay/rust-toolchain@v1
-        with:
-          toolchain: stable
+      steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v3
 
-      - name: Build for ${{ matrix.os }} - ${{ matrix.arch }}
-        if: matrix.os == 'ubuntu-latest'
-        run: |
-          make release
+        - name: Setup Rust
+          uses: dtolnay/rust-toolchain@v1
+          with:
+            toolchain: stable
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          body: '[Changelog](https://github.com/containerscrew/aws-sso-auth/blob/main/CHANGELOG.md)'
-          files: "*.zip\n*.rpm"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        - name: Setup MUSL
+          if: matrix.os == 'ubuntu-latest'
+          run: |
+            rustup target add x86_64-unknown-linux-musl
+            sudo apt-get -qq install musl-tools
+
+        - name: Build for ${{ matrix.os }} (arm64/amd64)
+          if: matrix.os == 'ubuntu-latest'
+          run: |
+            make release-linux
+
+        - name: Release
+          uses: softprops/action-gh-release@v1
+          with:
+            body: '[Changelog](https://github.com/containerscrew/aws-sso-auth/blob/main/CHANGELOG.md)'
+            files: "*.zip\n*.rpm"
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -19,6 +19,10 @@ doctoc: ## Create table of contents with doctoc
 pre-commit: ## Run pre-commit
 	pre-commit run -a
 
-release: ## Create release
-	cargo build --locked --release
-	#zip -j ${BIN_NAME}-v${VERSION}-x86_64-linux.zip target/x86_64-unknown-linux-musl/release/${BIN_NAME}
+release-linux: ## Create release
+	# First make release for amd64
+	cargo build --locked --release --target=x86_64-unknown-linux-musl
+	zip -j ${BIN_NAME}-v${VERSION}-x86_64-linux.zip target/x86_64-unknown-linux-musl/release/${BIN_NAME}
+	# Then, release for arm64
+	cargo build --locked --release --target=aarch64-unknown-linux-gnu
+	zip -j ${BIN_NAME}-v${VERSION}-arm64-linux.zip target/aarch64-unknown-linux-gnu/release/${BIN_NAME}
