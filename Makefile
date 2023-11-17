@@ -6,7 +6,7 @@ BUILD_TIME = $(shell date +"%Y/%m/%d %H:%M:%S")
 GIT_REVISION = $(shell git log -1 --format="%h")
 RUST_VERSION = $(word 2, $(shell rustc -V))
 LONG_VERSION = "$(VERSION) ( rev: $(GIT_REVISION), rustc: $(RUST_VERSION), build at: $(BUILD_TIME) )"
-BIN_NAME = aws-sso-rs
+BINARY_NAME = aws-sso-auth
 
 export LONG_VERSION
 
@@ -19,9 +19,6 @@ doctoc: ## Create table of contents with doctoc
 pre-commit: ## Run pre-commit
 	pre-commit run -a
 
-release_mac: ## Start release for Mac OSX
-	cargo build --release --target=x86_64-apple-darwin
-	zip -j ${BIN_NAME}-v${VERSION}-x86_64-mac.zip target/x86_64-apple-darwin/release/${BIN_NAME}
-
-run: ## Cargo run --release
-	cargo run --release
+release: ## Create release
+	cargo build --locked --release
+	#zip -j ${BIN_NAME}-v${VERSION}-x86_64-linux.zip target/x86_64-unknown-linux-musl/release/${BIN_NAME}

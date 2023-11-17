@@ -25,5 +25,14 @@ jobs:
         with:
           toolchain: stable
 
-      - name: Build Project
-        run: cargo build --release --target ${{ runner.os }}-${{ matrix.arch }}
+      - name: Build for ${{ matrix.os }} - ${{ matrix.arch }}
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          make release
+
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: aws-sso-auth-${{ matrix.os }}-${{ matrix.arch }}
+          path: target/release/

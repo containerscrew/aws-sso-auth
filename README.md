@@ -1,8 +1,16 @@
 <p align="center" >
     <img src="assets/rust-logo.svg" alt="logo" width="250"/>
-<h3 align="center">aws-sso-rs (BETA)</h3>
-<p align="center">Get your AWS credentials using SSO</p>
+<h3 align="center">aws-sso-auth</h3>
+<p align="center">Fetch your local ~/.aws/credentials using AWS SSO</p>
 <p align="center">Build with ❤ in Rust</p>
+</p>
+
+<p align="center" >
+    <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/containerscrew/aws-sso-auth">
+    [![License](https://img.shields.io/github/license/containerscrew/aws-sso-auth)](/LICENSE)
+    [![codecov](https://codecov.io/gh/containerscrew/aws-sso-auth/branch/main/graph/badge.svg)](https://codecov.io/gh/containerscrew/aws-sso-auth)
+    [![Release](https://img.shields.io/github/release/containerscrew/aws-sso-rs)](https://github.com/containerscrew/aws-sso-rs/releases/latest)
+    [![GitHub Releases Stats](https://img.shields.io/github/downloads/containerscrew/aws-sso-auth/total.svg?logo=github)](https://somsubhra.github.io/github-release-stats/?username=containerscrew&repository=aws-sso-auth)
 </p>
 
 
@@ -10,8 +18,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Badges](#badges)
-- [Disclaimer](#disclaimer)
+- [Pipelines](#pipelines)
 - [Introduction](#introduction)
 - [Installation](#installation)
   - [Pre-commit](#pre-commit)
@@ -19,10 +26,6 @@
   - [Switching accounts](#switching-accounts)
 - [Fish shell](#fish-shell)
 - [TO DO](#to-do)
-- [Developing](#developing)
-  - [Requirements](#requirements)
-  - [Clone](#clone)
-  - [Cargo run](#cargo-run)
   - [Build](#build)
 - [TO DO (not implemented yet)](#to-do-not-implemented-yet)
 - [Contribution](#contribution)
@@ -30,28 +33,21 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Badges
+# Pipelines
 ![Test Status](https://github.com/containerscrew/aws-sso-rs/actions/workflows/test.yml/badge.svg)
 ![Release Status](https://github.com/containerscrew/aws-sso-rs/actions/workflows/release.yml/badge.svg)
-[![codecov](https://codecov.io/gh/containerscrew/aws-sso-auth/branch/main/graph/badge.svg)](https://codecov.io/gh/containerscrew/aws-sso-auth)
-[![License](https://img.shields.io/github/license/containerscrew/aws-sso-rs)](/LICENSE)
-[![Release](https://img.shields.io/github/release/containerscrew/aws-sso-rs)](https://github.com/containerscrew/aws-sso-rs/releases/latest)
-
-# Disclaimer
-
-> I don't have any experience with Rust. I'm not a professional software developer. But, I enjoy trying to create things.
-I have some experience in python and Golang. I've only been programming in Rust for 2 weeks and trying to understand the language well. Rust is a new language which I find very interesting and I have fallen in love with it from the first moment, that is why I decided to make this tool in Rust.
-Probably this tool is more easy to do in Go or Python, but simple things are boring :)
+![Git Leaks Status](https://github.com/containerscrew/aws-sso-auth/actions/workflows/gitleaks.yml/badge.svg)
+![Coverage](https://github.com/containerscrew/aws-sso-auth/actions/workflows/coverage.yml/badge.svg)
 
 # Introduction
 
-This tools is just in **BETA** mode. It's working fine and you can download all credentials in your `$HOME/.aws/credentials`. In fact, `this README`is still in progress.
+....blablbla
 
 # Installation
 
-TO DO: provide automated pipelines to generate binaries with ARM&AMD binaries to `github releases`. Provide formula for brew mac users, and more!
+...TO DO
 
-By the moment, take a look to the **Developing** section below to use this tool locally using **cargo**.
+
 
 ## Pre-commit
 [pre-commit](./docs/pre-commit.md)
@@ -95,40 +91,10 @@ Type `aws-profile` in your terminal, and you will see all the accounts you have 
 
 # TO DO
 
-* Logging with env_logger (aws_config it's printing some unnecessary info)
-> https://docs.aws.amazon.com/sdk-for-rust/latest/dg/logging.html
 > https://github.com/awslabs/aws-sdk-rust/discussions/771
-* Code refactoring
 * Github actions pipeline to create binary and push to `releases`
 * Testing
 * Imagine you have 600 accounts with access in your AWS SSO portal, but you only want to fetch 100. How you can limit that?
-
-* Speed credentials download with `async` + `tokio:spawn` threading. The current code is not as fast as I would like.
-Avoid this problem: limit number of threads
-> thread 'tokio-runtime-worker' panicked at 'Can't get account credentials: TooManyRequestsException(TooManyRequestsException { message: Some("HTTP 429 Unknown Code")
-
-# Developing
-
-## Requirements
-
-* Rust
-* Cargo
-* Rustup
-
-Take a look to the [official documentation](https://www.rust-lang.org/tools/install)
-
-## Clone
-
-```bash
-git clone https://github.com/containerscrew/aws-sso-rs.git
-cd aws-sso-rs
-```
-
-## Cargo run
-
-```bash
-cargo run --start-url https://XXXXXX.awsapps.com/start --region eu-west-1
-```
 
 ## Build
 
