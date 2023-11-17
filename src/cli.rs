@@ -58,7 +58,7 @@ enum Commands {
         #[arg(
             short = 'w',
             long = "workers",
-            help = "Number of threads! Recommended: 2/3 max to avoid AWS API 429 errors TooManyRequestsException",
+            help = "Number of threads! Recommended: 5/8 max to avoid AWS API 429 errors TooManyRequestsException",
             default_value = "5",
             required = false
         )]
@@ -67,7 +67,7 @@ enum Commands {
             short = 'r',
             long = "retries",
             help = "Number of retries when you have AWS API errors",
-            default_value = "30",
+            default_value = "50",
             required = false
         )]
         retries: u32,

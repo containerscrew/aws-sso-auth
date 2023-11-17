@@ -30,12 +30,21 @@
 
 - [Pipeline badges](#pipeline-badges)
 - [Introduction](#introduction)
+- [Supported platforms](#supported-platforms)
+- [Supported IDP](#supported-idp)
 - [Installation](#installation)
+  - [Quick installation (latest version)](#quick-installation-latest-version)
+  - [Using cargo](#using-cargo)
 - [Usage](#usage)
+  - [Setup configuration](#setup-configuration)
+  - [Start fetching credentials](#start-fetching-credentials)
+  - [Debug level](#debug-level)
+  - [Check version](#check-version)
+- [Help command](#help-command)
   - [Switching accounts in your terminal](#switching-accounts-in-your-terminal)
 - [Fish shell](#fish-shell)
   - [Setting AWS_PROFILE](#setting-aws_profile)
-- [TO DO](#to-do)
+- [Credits](#credits)
 - [TO DO (not implemented yet)](#to-do-not-implemented-yet)
 - [Contribution](#contribution)
 - [LICENSE](#license)
@@ -52,19 +61,85 @@
 
 ....blablbla
 
+# Supported platforms
+
+| OS        | ARM64 | AMD64 |
+|-----------|:-----:|------:|
+| Mac       |  √    |   √   |
+| Linux     |  √    |   √   |
+
+# Supported IDP
+
+* Google Workspaces
+* Okta (not tested)
+
+If using other IDP with AWS SSO in your organization, and this tool don't work, please provide feedback in this repo. Open an issue!
+
 # Installation
 
-...TO DO
+## Quick installation (latest version)
 
+```shell
+curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/containerscrew/aws-sso-auth/main/scripts/install.sh | sh
+```
+
+## Using cargo
+
+Install rust toolchain:
+
+```shell
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+```shell
+cargo install aws-sso-auth --git https://github.com/containerscrew/aws-sso-auth
+```
 
 # Usage
 
-```bash
-aws-sso-auth --start-url https://XXXXXX.awsapps.com/start --region eu-west-1
+## Setup configuration
+
+```shell
+aws-sso-auth config --start-url https://XXXX.awsapps.com/start --aws-region eu-west-1 --profile-name mycompany
 ```
 
+> This command will save a file in `~/.aws/aws-sso-auth.json` with the previous configuration
+
+* **profile_name:** the name of the profile configuration you are saving. For example, your company name
 * **start_url:** your start URL of SSO AWS app (https://docs.aws.amazon.com/singlesignon/latest/userguide/howtochangeURL.html)
-* **region:** AWS region where you have your AWS SSO configured. By the default is `eu-west-1` (Ireland)
+* **region:** AWS region where you have your AWS SSO configured. By the default is `us-east-1`
+
+
+## Start fetching credentials
+
+```shell
+aws-sso-auth start
+```
+
+* **workers:** Number of async/thread AWS API calls. + threads == + speed. Recommended: 5/8 max to avoid AWS API 429 errors TooManyRequestsException. Default: 5
+* **retries:** Number of retries when AWS API return errors. Default: 50
+
+> This will open your default local browser where you have your IDP authenticated. In my case, I used Google as external IDP with AWS SSO
+
+## Debug level
+
+```shell
+aws-sso-auth -l debug start
+```
+
+* **--log-level:** Log level. Default: info. Possible values: info, warn, trace, debug, error
+
+## Check version
+
+```shell
+aws-sso-auth --version
+```
+
+# Help command
+
+```shell
+aws-sso-auth --help
+```
 
 > All the credentials will be saved in your $HOME/.aws/credentials with the following pattern: [AccountName@RoleName] you are assuming
 
@@ -114,13 +189,10 @@ Type `aws-profile` in your terminal, and you will see all the accounts you have 
 
 [Official documentation](https://github.com/junegunn/fzf#installation)
 
-# TO DO
 
-> https://github.com/awslabs/aws-sdk-rust/discussions/771
-* Github actions pipeline to create binary and push to `releases`
-* Testing
-* Imagine you have 600 accounts with access in your AWS SSO portal, but you only want to fetch 100. How you can limit that?
+# Credits
 
+...
 
 # TO DO (not implemented yet)
 
@@ -128,11 +200,8 @@ Type `aws-profile` in your terminal, and you will see all the accounts you have 
 all their config (start-url, region) inside the config file.
 * If you have 200 accounts, only 123 (max), will be fetched
 * Select which account credentials (with prefix) do you want to fetch.
-* Remove
 * Testing
 * In console output, exists and empty new line when after info message `Type ENTER to continue`. Need to flush console
-* Implement multiple retries when you have 429 errors in API calls
-* Overwrite `~/.aws/credentials` file every time you fetch account credentials
 * Create function to open file
 * Codecoverage pipeline not working
 * Changelog with release-please
