@@ -9,7 +9,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, macOS-latest, windows-latest]
+        os: [ubuntu-latest, macOS-latest]
 
     runs-on: ${{ matrix.os }}
 
@@ -35,7 +35,7 @@ jobs:
 
       - name: Build for macOS
         if: matrix.os == 'macOS-latest'
-        run: make release_mac
+        run: make release-mac
 
       - name: Release
         uses: softprops/action-gh-release@v1
