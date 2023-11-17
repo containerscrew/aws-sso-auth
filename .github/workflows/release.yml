@@ -66,7 +66,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: google-github-actions/release-please-action@v3
+      - name: Release-please
+        uses: google-github-actions/release-please-action@v3
         with:
-          release-type: node
+          release-type: rust
           package-name: aws-sso-auth
