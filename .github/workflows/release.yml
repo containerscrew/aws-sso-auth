@@ -9,27 +9,21 @@ on:
 
 jobs:
   build:
+    runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        os: [macOS-latest]
-        rust: [stable]
-    runs-on: ${{ matrix.os }}
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        arch: [x64, arm64]
+
     steps:
-      - name: Setup Rust
-        uses: dtolnay/rust-toolchain@v1
-        with:
-          toolchain: ${{ matrix.rust }}
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-      - name: Build for macOS
-        if: matrix.os == 'macOS-latest'
-        run: make release_mac
-
-      - name: Release
-        uses: softprops/action-gh-release@v1
+      - name: Set up Rust
+        uses: actions/setup-rust@v2
         with:
-          body: '[Changelog](https://github.com/containerscrew/aws-sso-rs/blob/main/CHANGELOG.md)'
-          files: "*.zip\n*.rpm"
-        env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          rust-version: stable
+
+      - name: Build Project
+        run: cargo build --release --target ${{ runner.os }}-${{ matrix.arch }}
