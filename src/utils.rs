@@ -1,9 +1,9 @@
-use std::fs::{File, OpenOptions};
 use crate::commands::config::{CONFIG_FILE_PATH, CREDENTIALS_FILE_PATH};
 use aws_sso_auth::AccountCredentials;
 use colored::Colorize;
 use configparser::ini::Ini;
 use log::{error, info};
+use std::fs::{File, OpenOptions};
 use std::io;
 use std::io::{Read, Write};
 use std::process::exit;
@@ -79,7 +79,6 @@ pub fn write_configuration(all_credentials: Vec<AccountCredentials>, region_name
 
     info!("Configuration file saved!")
 }
-
 
 // pub fn config_file_exists(path: &str) {
 //     // This function checks if config file ~/.aws/aws-sso-auth.json exists

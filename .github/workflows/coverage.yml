@@ -1,11 +1,11 @@
-name: Rust Code Coverage
+name: Rust Code Coverage 🚦
 
 on:
   push:
     branches:
-      - '**'
+      - 'main'
     tags:
-      - '*'
+      - '**'
 
 jobs:
   coverage:

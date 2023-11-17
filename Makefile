@@ -19,10 +19,18 @@ doctoc: ## Create table of contents with doctoc
 pre-commit: ## Run pre-commit
 	pre-commit run -a
 
-release-linux: ## Create release
+release-linux: ## Create release for linux arm and amd64
 	# First make release for amd64
 	cargo build --release --target=x86_64-unknown-linux-musl
-	zip -j ${BIN_NAME}-v${VERSION}-x86_64-linux.zip target/x86_64-unknown-linux-musl/release/${BIN_NAME}
-	# Then, release for arm64
+	zip -j ${BINARY_NAME}-v${VERSION}-x86_64-linux.zip target/x86_64-unknown-linux-musl/release/${BINARY_NAME}
+	# Release for arm64
 	cargo build --release --target=aarch64-unknown-linux-gnu
-	zip -j ${BIN_NAME}-v${VERSION}-arm64-linux.zip target/aarch64-unknown-linux-gnu/release/${BIN_NAME}
+	zip -j ${BINARY_NAME}-v${VERSION}-arm64-linux.zip target/aarch64-unknown-linux-gnu/release/${BINARY_NAME}
+
+
+release-mac: ## Create release for mac arm and amd64
+	cargo build --release --target=x86_64-apple-darwin
+	zip -j ${BINARY_NAME}-v${VERSION}-x86_64-mac.zip target/x86_64-apple-darwin/release/${BINARY_NAME}
+	# Release for arm64
+	cargo build --release --target=aarch64-apple-darwin
+	zip -j ${BINARY_NAME}-v${VERSION}-arm64-mac.zip target/aarch64-apple-darwin/release/${BINARY_NAME}

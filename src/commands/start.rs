@@ -68,7 +68,10 @@ pub async fn async_start(
     let account_list = get_account_list(&sso_client, &token).await?;
 
     // Provide info about all account that should be downloaded
-    info!("{} accounts to fetch. Each account can have multiple roles", account_list.len());
+    info!(
+        "{} accounts to fetch. Each account can have multiple roles",
+        account_list.len()
+    );
 
     let mut all_credentials: Vec<AccountCredentials> = vec![];
 
