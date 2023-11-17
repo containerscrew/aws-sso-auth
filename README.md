@@ -33,6 +33,7 @@
 # Badges
 ![Test Status](https://github.com/containerscrew/aws-sso-rs/actions/workflows/test.yml/badge.svg)
 ![Release Status](https://github.com/containerscrew/aws-sso-rs/actions/workflows/release.yml/badge.svg)
+[![codecov](https://codecov.io/gh/containerscrew/aws-sso-auth/branch/main/graph/badge.svg)](https://codecov.io/gh/containerscrew/aws-sso-auth)
 [![License](https://img.shields.io/github/license/containerscrew/aws-sso-rs)](/LICENSE)
 [![Release](https://img.shields.io/github/release/containerscrew/aws-sso-rs)](https://github.com/containerscrew/aws-sso-rs/releases/latest)
 
