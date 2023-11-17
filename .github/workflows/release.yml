@@ -38,7 +38,10 @@ jobs:
           target: ${{ matrix.platform.target }}
           args: "--release"
           strip: true
-
+      - name: Test
+        run: |
+          ls -ltrah
+          ls -ltrah target/
 
 #      - name: Setup Rust
 #        uses: dtolnay/rust-toolchain@v1
