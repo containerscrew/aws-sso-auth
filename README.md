@@ -28,7 +28,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Pipelines](#pipelines)
+- [Pipeline badges](#pipeline-badges)
 - [Introduction](#introduction)
 - [Installation](#installation)
   - [Pre-commit](#pre-commit)
@@ -43,7 +43,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Pipelines
+# Pipeline badges
 ![Test Status](https://github.com/containerscrew/aws-sso-rs/actions/workflows/test.yml/badge.svg)
 ![Release Status](https://github.com/containerscrew/aws-sso-rs/actions/workflows/release.yml/badge.svg)
 ![Git Leaks Status](https://github.com/containerscrew/aws-sso-auth/actions/workflows/gitleaks.yml/badge.svg)
