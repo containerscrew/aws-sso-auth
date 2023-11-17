@@ -59,7 +59,7 @@ jobs:
       - name: Test
         run: |
           ls -ltrah
-          ls -ltrah target/${{ matrix.platform.target }}/
+          ls -ltrah target/${{ matrix.platform.target }}/release
 
 #      - name: Setup Rust
 #        uses: dtolnay/rust-toolchain@v1
