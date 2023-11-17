@@ -136,6 +136,7 @@ all their config (start-url, region) inside the config file.
 * Create function to open file
 * Codecoverage pipeline not working
 * Changelog with release-please
+* Create Homebrew Formula
 
 # Contribution
 
