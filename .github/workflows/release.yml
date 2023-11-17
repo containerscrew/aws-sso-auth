@@ -2,6 +2,7 @@ name: Release 📦
 
 permissions:
   contents: write
+  pull-requests: write
 
 on:
   push:
@@ -64,3 +65,8 @@ jobs:
           files: "*.zip"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: google-github-actions/release-please-action@v3
+        with:
+          release-type: node
+          package-name: aws-sso-auth
