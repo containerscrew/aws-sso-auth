@@ -48,7 +48,7 @@ jobs:
 #        run: |
 #          make release-linux
 
-      - name: Build for macOS
+#      - name: Build for macOS
 #        if: matrix.os == 'macOS-latest'
 #        run: make release-mac
 
