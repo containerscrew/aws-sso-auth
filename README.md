@@ -12,8 +12,8 @@
     <a href="/LICENSE">
       <img alt="License" src="https://img.shields.io/github/license/containerscrew/aws-sso-auth">
     </a>
-    <a href="https://codecov.io/gh/containerscrew/aws-sso-auth">
-      <img alt="codecov" src="https://codecov.io/gh/containerscrew/aws-sso-auth/branch/main/graph/badge.svg">
+    <a href="https://codecov.io/gh/containerscrew/aws-sso-auth" >
+      <img src="https://codecov.io/gh/containerscrew/aws-sso-auth/graph/badge.svg?token=4AI2U4PX4V"/>
     </a>
     <a href="https://github.com/containerscrew/aws-sso-auth/releases/latest">
       <img alt="Release" src="https://img.shields.io/github/release/containerscrew/aws-sso-auth">
