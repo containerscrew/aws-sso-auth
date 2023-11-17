@@ -116,6 +116,12 @@ aws-sso-auth config --start-url https://XXXX.awsapps.com/start --aws-region eu-w
 aws-sso-auth start
 ```
 
+Or with flags:
+
+```shell
+aws-sso-auth start -w 5 -r 40
+```
+
 * **workers:** Number of async/thread AWS API calls. + threads == + speed. Recommended: 5/8 max to avoid AWS API 429 errors TooManyRequestsException. Default: 5
 * **retries:** Number of retries when AWS API return errors. Default: 50
 
