@@ -6,6 +6,7 @@ on:
      - "main"
     tags:
       - '*'
+
 env:
   CARGO_TERM_COLOR: always
 
