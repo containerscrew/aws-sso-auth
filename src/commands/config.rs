@@ -1,9 +1,9 @@
 use crate::utils::extend_path;
 use serde::{Deserialize, Serialize};
-use std::fs::{File, OpenOptions};
-use std::io::{BufRead, Write};
+use std::fs::{OpenOptions};
+use std::io::{Write};
 use std::process::exit;
-use std::{fs, io};
+
 use tracing::{error, info};
 
 // The name of the file and directory for the configuration will not be custom by the moment
