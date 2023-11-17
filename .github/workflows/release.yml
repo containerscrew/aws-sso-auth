@@ -13,18 +13,32 @@ jobs:
     strategy:
       matrix:
         platform:
-          - release_for: Linux-arm64
+          - release_for: linux-arm64
             os: ubuntu-latest
             target: aarch64-unknown-linux-gnu
             bin: aws-sso-auth
             name: aws-sso-auth-linux-arm64.tar.gz
             command: build
 
+          - release_for: linux-x86_64
+            os: ubuntu-latest
+            target: x86_64-unknown-linux-musl
+            bin: aws-sso-auth
+            name: aws-sso-auth-linux-x86_64.tar.gz
+            command: build
+
           - release_for: macOS-x86_64
             os: macOS-latest
             target: x86_64-apple-darwin
             bin: aws-sso-auth
-            name: aws-sso-auth-Darwin-x86_64.tar.gz
+            name: aws-sso-auth-darwin-x86_64.tar.gz
+            command: build
+
+          - release_for: macOS-arm64
+            os: macOS-latest
+            target: aarch64-apple-darwin
+            bin: aws-sso-auth
+            name: aws-sso-auth-darwin-arm64.tar.gz
             command: build
 
     runs-on: ${{ matrix.platform.os }}
@@ -38,10 +52,6 @@ jobs:
           target: ${{ matrix.platform.target }}
           args: "--release"
           strip: true
-      - name: Test
-        run: |
-          ls -ltrah
-          ls -ltrah target/
 
 #      - name: Setup Rust
 #        uses: dtolnay/rust-toolchain@v1
@@ -79,10 +89,10 @@ jobs:
 #        if: matrix.os == 'macOS-latest'
 #        run: make release-mac
 
-#      - name: Release
-#        uses: softprops/action-gh-release@v1
-#        with:
-#          body: '[Changelog](https://github.com/containerscrew/aws-sso-auth/blob/main/CHANGELOG.md)'
-#          files: "*.zip\n*.rpm"
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body: '[Changelog](https://github.com/containerscrew/aws-sso-auth/blob/main/CHANGELOG.md)'
+          files: "*.tar.gz\n*.rpm"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
