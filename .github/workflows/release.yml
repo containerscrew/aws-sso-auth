@@ -19,23 +19,23 @@ jobs:
             bin: aws-sso-auth
             command: build
 
-          - release_for: linux-x86_64
-            os: ubuntu-latest
-            target: x86_64-unknown-linux-musl
-            bin: aws-sso-auth
-            command: build
-
-          - release_for: macOS-x86_64
-            os: macOS-latest
-            target: x86_64-apple-darwin
-            bin: aws-sso-auth
-            command: build
-
-          - release_for: macOS-arm64
-            os: macOS-latest
-            target: aarch64-apple-darwin
-            bin: aws-sso-auth
-            command: build
+#          - release_for: linux-x86_64
+#            os: ubuntu-latest
+#            target: x86_64-unknown-linux-musl
+#            bin: aws-sso-auth
+#            command: build
+#
+#          - release_for: macOS-x86_64
+#            os: macOS-latest
+#            target: x86_64-apple-darwin
+#            bin: aws-sso-auth
+#            command: build
+#
+#          - release_for: macOS-arm64
+#            os: macOS-latest
+#            target: aarch64-apple-darwin
+#            bin: aws-sso-auth
+#            command: build
 
     runs-on: ${{ matrix.platform.os }}
     steps:
@@ -52,19 +52,19 @@ jobs:
           target: ${{ matrix.platform.target }}
           args: "--release"
           strip: true
-      - uses: mislav/bump-homebrew-formula-action@v3
-        with:
-          # By default, this will edit the `my_formula.rb` formula in
-          # homebrew-core to update its "url" field to:
-          # `https://github.com/OWNER/REPO/archive/refs/tags/<tag-name>.tar.gz`
-          # The "sha256" formula field will get automatically recomputed.
-          formula-name: aws-sso-auth
-        env:
-          # the personal access token should have "repo" & "workflow" scopes
-          COMMITTER_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+#      - uses: mislav/bump-homebrew-formula-action@v3
+#        with:
+#          # By default, this will edit the `my_formula.rb` formula in
+#          # homebrew-core to update its "url" field to:
+#          # `https://github.com/OWNER/REPO/archive/refs/tags/<tag-name>.tar.gz`
+#          # The "sha256" formula field will get automatically recomputed.
+#          formula-name: aws-sso-auth
+#        env:
+#          # the personal access token should have "repo" & "workflow" scopes
+#          COMMITTER_TOKEN: ${{ secrets.RELEASE_TOKEN }}
       - name: Package zip
         run: |
-          zip -j aws-sso-auth-${{ matrix.platform.release_for }}.zip target/${{ matrix.platform.target }}/release/aws-sso-auth
+          make package ARCH=${{ matrix.platform.release_for }} TARGET=${{ matrix.platform.target }}
 
 #      - name: Setup Rust
 #        uses: dtolnay/rust-toolchain@v1
@@ -102,10 +102,10 @@ jobs:
 #        if: matrix.os == 'macOS-latest'
 #        run: make release-mac
 
-#      - name: Release
-#        uses: softprops/action-gh-release@v1
-#        with:
-#          body: '[Changelog](https://github.com/containerscrew/aws-sso-auth/blob/main/CHANGELOG.md)'
-#          files: "*.zip\n"
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body: '[Changelog](https://github.com/containerscrew/aws-sso-auth/blob/main/CHANGELOG.md)'
+          files: "*.zip\n"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
