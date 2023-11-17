@@ -3,7 +3,7 @@ name: Rust Code Coverage
 on:
   push:
     branches:
-      - main
+      - "*"
 
 jobs:
   coverage:
