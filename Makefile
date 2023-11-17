@@ -21,8 +21,8 @@ pre-commit: ## Run pre-commit
 
 release-linux: ## Create release
 	# First make release for amd64
-	cargo build --locked --release --target=x86_64-unknown-linux-musl
+	cargo build --release --target=x86_64-unknown-linux-musl
 	zip -j ${BIN_NAME}-v${VERSION}-x86_64-linux.zip target/x86_64-unknown-linux-musl/release/${BIN_NAME}
 	# Then, release for arm64
-	cargo build --locked --release --target=aarch64-unknown-linux-gnu
+	cargo build --release --target=aarch64-unknown-linux-gnu
 	zip -j ${BIN_NAME}-v${VERSION}-arm64-linux.zip target/aarch64-unknown-linux-gnu/release/${BIN_NAME}
