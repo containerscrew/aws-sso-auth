@@ -30,9 +30,10 @@ jobs:
         run: |
           make release
 
-
-      - name: Archive artifacts
-        uses: actions/upload-artifact@v3
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          name: aws-sso-auth-${{ matrix.os }}-${{ matrix.arch }}
-          path: target/release/
+          body: '[Changelog](https://github.com/containerscrew/aws-sso-auth/blob/main/CHANGELOG.md)'
+          files: "*.zip\n*.rpm"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
