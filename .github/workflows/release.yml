@@ -2,8 +2,8 @@ name: Release 📦
 
 on:
   push:
-#    branches:
-#      - "*"
+    branches:
+      - "*"
     tags:
       - 'v*.*.*'
 
