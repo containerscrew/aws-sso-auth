@@ -46,7 +46,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup MUSL
-        if: matrix.platform.os == "ubuntu-latest"
+        if: matrix.platform.os == 'ubuntu-latest'
         run: |
           sudo apt-get -qq install musl-tools
       - name: Build binary
@@ -93,10 +93,10 @@ jobs:
 #        if: matrix.os == 'macOS-latest'
 #        run: make release-mac
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          body: '[Changelog](https://github.com/containerscrew/aws-sso-auth/blob/main/CHANGELOG.md)'
-          files: "*.tar.gz\n*.rpm"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Release
+#        uses: softprops/action-gh-release@v1
+#        with:
+#          body: '[Changelog](https://github.com/containerscrew/aws-sso-auth/blob/main/CHANGELOG.md)'
+#          files: "*.tar.gz\n*.rpm"
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
