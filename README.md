@@ -7,10 +7,18 @@
 
 <p align="center" >
     <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/containerscrew/aws-sso-auth">
-    <img alt="/LICENSE" src="https://img.shields.io/github/license/containerscrew/aws-sso-auth">
-    <img alt="https://codecov.io/gh/containerscrew/aws-sso-auth/branch/main/graph/badge.svg" src="https://codecov.io/gh/containerscrew/aws-sso-auth">
-    <img alt="https://img.shields.io/github/release/containerscrew/aws-sso-rs" src="https://github.com/containerscrew/aws-sso-rs/releases/latest">
-    [![GitHub Releases Stats](https://img.shields.io/github/downloads/containerscrew/aws-sso-auth/total.svg?logo=github)](https://somsubhra.github.io/github-release-stats/?username=containerscrew&repository=aws-sso-auth)
+    <a href="/LICENSE">
+      <img alt="License" src="https://img.shields.io/github/license/containerscrew/aws-sso-auth">
+    </a>
+    <a href="https://codecov.io/gh/containerscrew/aws-sso-auth">
+      <img alt="codecov" src="https://codecov.io/gh/containerscrew/aws-sso-auth/branch/main/graph/badge.svg">
+    </a>
+    <a href="https://github.com/containerscrew/aws-sso-rs/releases/latest">
+      <img alt="Release" src="https://img.shields.io/github/release/containerscrew/aws-sso-rs">
+    </a>
+    <a href="https://somsubhra.github.io/github-release-stats/?username=containerscrew&repository=aws-sso-auth">
+      <img alt="GitHub Releases Stats" src="https://img.shields.io/github/downloads/containerscrew/aws-sso-auth/total.svg?logo=github">
+    </a>
 </p>
 
 
