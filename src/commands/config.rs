@@ -5,8 +5,6 @@ use std::io::{Write};
 use std::process::exit;
 
 use tracing::{error, info};
-
-// The name of the file and directory for the configuration will not be custom by the moment
 pub const CONFIG_FILE_PATH: &str = "~/.aws/aws-sso-auth.json";
 pub const CREDENTIALS_FILE_PATH: &str = "~/.aws/credentials";
 

@@ -2,6 +2,8 @@ name: Release 📦
 
 on:
   push:
+    branches:
+      - '**'
     tags:
       - 'v*.*.*'
 
@@ -22,6 +24,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      - name: Install dependencies
+        run: |
+          sudo dpkg --add-architecture arm64
+          sudo apt-get update
+          sudo apt-get install -y libc6:arm64 qemu-user-static musl-tools
+
+      - name: Install cross
+        run: cargo install cross
+
+      - name: Build for ARM64
+        run: cross build --target aarch64-apple-darwin --release
+
 #      - name: Setup
 #        if: matrix.os == 'ubuntu-latest'
 #        run: |
@@ -35,13 +49,13 @@ jobs:
 #          make release-linux
 
       - name: Build for macOS
-        if: matrix.os == 'macOS-latest'
-        run: make release-mac
+#        if: matrix.os == 'macOS-latest'
+#        run: make release-mac
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          body: '[Changelog](https://github.com/containerscrew/aws-sso-auth/blob/main/CHANGELOG.md)'
-          files: "*.zip\n*.rpm"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Release
+#        uses: softprops/action-gh-release@v1
+#        with:
+#          body: '[Changelog](https://github.com/containerscrew/aws-sso-auth/blob/main/CHANGELOG.md)'
+#          files: "*.zip\n*.rpm"
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
