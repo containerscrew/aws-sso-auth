@@ -15,8 +15,8 @@
     <a href="https://codecov.io/gh/containerscrew/aws-sso-auth">
       <img alt="codecov" src="https://codecov.io/gh/containerscrew/aws-sso-auth/branch/main/graph/badge.svg">
     </a>
-    <a href="https://github.com/containerscrew/aws-sso-rs/releases/latest">
-      <img alt="Release" src="https://img.shields.io/github/release/containerscrew/aws-sso-rs">
+    <a href="https://github.com/containerscrew/aws-sso-auth/releases/latest">
+      <img alt="Release" src="https://img.shields.io/github/release/containerscrew/aws-sso-auth">
     </a>
     <a href="https://somsubhra.github.io/github-release-stats/?username=containerscrew&repository=aws-sso-auth">
       <img alt="GitHub Releases Stats" src="https://img.shields.io/github/downloads/containerscrew/aws-sso-auth/total.svg?logo=github">
@@ -44,8 +44,8 @@
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # Pipeline badges
-![Test Status](https://github.com/containerscrew/aws-sso-rs/actions/workflows/test.yml/badge.svg)
-![Release Status](https://github.com/containerscrew/aws-sso-rs/actions/workflows/release.yml/badge.svg)
+![Test Status](https://github.com/containerscrew/aws-sso-auth/actions/workflows/test.yml/badge.svg)
+![Release Status](https://github.com/containerscrew/aws-sso-auth/actions/workflows/release.yml/badge.svg)
 ![Git Leaks Status](https://github.com/containerscrew/aws-sso-auth/actions/workflows/gitleaks.yml/badge.svg)
 ![Coverage](https://github.com/containerscrew/aws-sso-auth/actions/workflows/coverage.yml/badge.svg)
 
@@ -65,7 +65,7 @@
 # Usage
 
 ```bash
-aws-sso-rs --start-url https://XXXXXX.awsapps.com/start --region eu-west-1
+aws-sso-auth --start-url https://XXXXXX.awsapps.com/start --region eu-west-1
 ```
 
 * **start_url:** your start URL of SSO AWS app (https://docs.aws.amazon.com/singlesignon/latest/userguide/howtochangeURL.html)
