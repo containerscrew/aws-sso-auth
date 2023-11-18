@@ -41,10 +41,10 @@
   - [Debug level](#debug-level)
   - [Check version](#check-version)
 - [Help command](#help-command)
+  - [Take a look inside `~/.aws/credentials`](#take-a-look-inside-awscredentials)
   - [Switching accounts in your terminal](#switching-accounts-in-your-terminal)
 - [Fish shell](#fish-shell)
   - [Setting AWS_PROFILE](#setting-aws_profile)
-- [Credits](#credits)
 - [TO DO (not implemented yet)](#to-do-not-implemented-yet)
 - [Contribution](#contribution)
 - [LICENSE](#license)
@@ -59,7 +59,9 @@
 
 # Introduction
 
-....blablbla
+This tool will help you download your AWS organization's account credentials using `AWS SSO`. What we previously set manually with *IAM users* **(aws_access_key_id and aws_secret_access_key)**, now we have it automatically using AWS SSO, setting a token with expiration (depending on how you have AWS SSO configured).
+It's a tool to use on a daily basis and be able to download the credentials in `~/.aws/credentials` and thus be able to work with the `aws cli` from the terminal, `EKS authenticated with IAM`, `terraform/terragrunt`... and more.
+As you well know, AWS SSO can be configured to authenticate with an external IDP. In this case ONLY Google Workspaces has been tested as external IDP. [Take a look in supported IDP](https://github.com/containerscrew/aws-sso-auth/tree/latest_refactors#supported-idp)
 
 # Supported platforms
 
@@ -71,7 +73,6 @@
 # Supported IDP
 
 * Google Workspaces
-* Okta (not tested)
 
 If using other IDP with AWS SSO in your organization, and this tool don't work, please provide feedback in this repo. Open an issue!
 
@@ -149,6 +150,12 @@ aws-sso-auth --help
 
 > All the credentials will be saved in your $HOME/.aws/credentials with the following pattern: [AccountName@RoleName] you are assuming
 
+## Take a look inside `~/.aws/credentials`
+
+```shell
+cat ~/.aws/credentials
+```
+
 ## Switching accounts in your terminal
 
 Copy the following function in your `~/.zshrc` or `~/.bashrc`:
@@ -196,22 +203,17 @@ Type `aws-profile` in your terminal, and you will see all the accounts you have 
 [Official documentation](https://github.com/junegunn/fzf#installation)
 
 
-# Credits
-
-...
-
 # TO DO (not implemented yet)
 
 * Multiple AWS SSO account configurations inside `aws-sso-auth.json` Imagine you are working in a consultant, and you have multiple customers with AWS SSO, and you want to save
 all their config (start-url, region) inside the config file.
 * If you have 200 accounts, only 123 (max), will be fetched
-* Select which account credentials (with prefix) do you want to fetch.
-* Testing
-* In console output, exists and empty new line when after info message `Type ENTER to continue`. Need to flush console
-* Create function to open file
+* Select which account credentials (with prefix) do you want to fetch (maybe you don't want to fetch all accounts)
+* Testing and mocking AWS API calls
 * Codecoverage pipeline not working
 * Changelog with release-please
 * Create Homebrew Formula
+* Documentation in code functions
 
 # Contribution
 

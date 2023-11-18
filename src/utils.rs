@@ -1,12 +1,9 @@
-use crate::commands::config::{CREDENTIALS_FILE_PATH};
+use crate::commands::config::CREDENTIALS_FILE_PATH;
 use aws_sso_auth::AccountCredentials;
 use colored::Colorize;
 use configparser::ini::Ini;
 use log::{error, info};
-
 use std::io;
-use std::io::{Write};
-
 
 pub fn print_banner() {
     let banner = r#"

@@ -4,7 +4,7 @@ use aws_sso_auth::{
     get_device_authorization_credentials, get_register_device_credentials, sso_client,
     ssoidc_client, AccountCredentials, DeviceAuthCredentials, DeviceClientCredentials,
 };
-use log::warn;
+use log::{debug, warn};
 use tracing::{error, info};
 
 pub fn start(region_name: String, start_url: String, workers: usize, retries: u32) {
@@ -73,6 +73,8 @@ pub async fn async_start(
         account_list.len()
     );
 
+    info!("Starting...");
+
     let mut all_credentials: Vec<AccountCredentials> = vec![];
 
     // Semaphore will control the number of concurrent threads
@@ -97,7 +99,7 @@ pub async fn async_start(
             .await
             {
                 Ok(account_credentials) => {
-                    info!("Credentials fetched for {}", &account_name);
+                    debug!("Credentials fetched for {}", &account_name);
                     Ok(account_credentials)
                 }
                 Err(err) => {
