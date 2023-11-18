@@ -68,6 +68,8 @@ In this case ONLY Google Workspaces has been tested as external IDP. [More info 
 
 In short, we want to have the credentials of our `AWS accounts/roles`, using `AWS SSO`, stored in our `~/.aws/credentials` to be able to work daily with our tools **(terraform, aws cli...)**
 
+> This tool requires human interaction, since the authorization request must be manually approved from the browser.
+
 # Requirements
 
 * Our default browser that we work with must be authenticated with our IDP. In this case, gmail if we use Google Workspaces.
