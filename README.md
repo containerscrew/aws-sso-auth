@@ -34,7 +34,7 @@
 - [Supported platforms](#supported-platforms)
 - [Supported IDP](#supported-idp)
 - [Installation](#installation)
-  - [Quick installation (latest version)](#quick-installation-latest-version)
+  - [Quick installation](#quick-installation)
   - [Using cargo](#using-cargo)
 - [Usage](#usage)
   - [Setup configuration](#setup-configuration)
@@ -45,10 +45,10 @@
   - [Take a look inside `~/.aws/credentials`](#take-a-look-inside-awscredentials)
   - [Example of credentials file](#example-of-credentials-file)
 - [Switching accounts in your terminal](#switching-accounts-in-your-terminal)
-  - [ZSH/BASH shell](#zshbash-shell)
+  - [Zsh/Bash shell](#zshbash-shell)
   - [Fish shell](#fish-shell)
   - [Setting AWS_PROFILE](#setting-aws_profile)
-- [Demo](#demo)
+- [Capture examples](#capture-examples)
 - [TO DO (not implemented yet)](#to-do-not-implemented-yet)
 - [Contribution](#contribution)
 - [LICENSE](#license)
@@ -87,7 +87,7 @@ If using other IDP with AWS SSO in your organization, and this tool don't work, 
 
 # Installation
 
-## Quick installation (latest version)
+## Quick installation
 
 ```shell
 curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/containerscrew/aws-sso-auth/main/scripts/install.sh | sh
@@ -189,7 +189,7 @@ aws_session_token=XXXX
 
 # Switching accounts in your terminal
 
-## ZSH/BASH shell
+## Zsh/Bash shell
 
 Copy the following function in your `~/.zshrc` or `~/.bashrc`:
 
@@ -235,7 +235,7 @@ Type `aws-profile` in your terminal, and you will see all the accounts you have 
 
 [Official documentation](https://github.com/junegunn/fzf#installation)
 
-# Demo
+# Capture examples
 
 
 
