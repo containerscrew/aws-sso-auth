@@ -36,6 +36,7 @@
 - [Installation](#installation)
   - [Quick installation](#quick-installation)
   - [Using cargo](#using-cargo)
+  - [Build locally](#build-locally)
 - [Usage](#usage)
   - [Setup configuration](#setup-configuration)
   - [Start fetching credentials](#start-fetching-credentials)
@@ -105,6 +106,15 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 ```shell
 cargo install aws-sso-auth --git https://github.com/containerscrew/aws-sso-auth
+```
+
+## Build locally
+
+```shell
+git clone https://github.com/containerscrew/aws-sso-auth
+cd aws-sso-auth/
+cargo build --release
+./target/release/aws-sso-auth
 ```
 
 # Usage
