@@ -83,7 +83,7 @@ In short, we want to have the credentials of our `AWS accounts/roles`, using `AW
 
 * Google Workspaces
 
-If using other IDP with AWS SSO in your organization, and this tool don't work, please provide feedback in this repo. Open an issue!
+If using other IDP with AWS SSO in your organization, and this tool don't work, please provide feedback in this repo. Open an issue and I will try to reproduce it!
 
 # Installation
 
