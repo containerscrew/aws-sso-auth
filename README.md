@@ -237,7 +237,8 @@ Type `aws-profile` in your terminal, and you will see all the accounts you have 
 
 # Capture examples
 
-
+![Executing start command](./assets/aws-sso-auth-start.png)
+![Final result](./assets/final-result.png)
 
 
 # TO DO (not implemented yet)
