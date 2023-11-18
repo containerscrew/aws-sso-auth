@@ -30,6 +30,7 @@
 
 - [Pipeline badges](#pipeline-badges)
 - [Introduction](#introduction)
+- [Requirements](#requirements)
 - [Supported platforms](#supported-platforms)
 - [Supported IDP](#supported-idp)
 - [Installation](#installation)
@@ -59,9 +60,14 @@
 
 # Introduction
 
-This tool will help you download your AWS organization's account credentials using `AWS SSO`. What we previously set manually with *IAM users* **(aws_access_key_id and aws_secret_access_key)**, now we have it automatically using AWS SSO, setting a token with expiration (depending on how you have AWS SSO configured).
-It's a tool to use on a daily basis and be able to download the credentials in `~/.aws/credentials` and thus be able to work with the `aws cli` from the terminal, `EKS authenticated with IAM`, `terraform/terragrunt`... and more.
-As you well know, AWS SSO can be configured to authenticate with an external IDP. In this case ONLY Google Workspaces has been tested as external IDP. [Take a look in supported IDP](https://github.com/containerscrew/aws-sso-auth/tree/latest_refactors#supported-idp)
+This tool will help you download your AWS organization's account credentials using `AWS SSO`. What we previously set manually with *IAM users* (aws_access_key_id and aws_secret_access_key), we now have automatically using AWS SSO (+ expiration token, depending on what you have configured).
+In this case ONLY Google Workspaces has been tested as external IDP. [More info in supported IDP, just below](https://github.com/containerscrew/aws-sso-auth/tree/latest_refactors#supported-idp)
+
+In short, we want to have the credentials of our AWS accounts/roles, using AWS SSO, stored in our ~/.aws/credentials` to be able to work daily with our tools (terraform, aws cli...)
+
+# Requirements
+
+* Our default browser that we work with must be authenticated with our IDP. In this case, gmail if we use Google Workspaces.
 
 # Supported platforms
 
