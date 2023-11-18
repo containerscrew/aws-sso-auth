@@ -264,7 +264,7 @@ all their config (start-url, region) inside the config file.
 * Changelog with release-please
 * Create Homebrew Formula
 * Documentation in code functions
-* Customize how account credentials are saved: `[AccountName@RoleName]` for `[WHATEVER]`
+* Customize how account credentials are saved: `[AccountName@RoleName]` for `[PUT-YOUR-LOGIC-HERE]`
 
 # Contribution
 
