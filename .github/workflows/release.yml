@@ -65,9 +65,3 @@ jobs:
           files: "*.zip"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Release-please
-        uses: google-github-actions/release-please-action@v3
-        with:
-          release-type: rust
-          package-name: aws-sso-auth
