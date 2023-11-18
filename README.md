@@ -90,7 +90,7 @@ If using other IDP with AWS SSO in your organization, and this tool don't work, 
 ## Quick installation
 
 ```shell
-curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/containerscrew/aws-sso-auth/main/scripts/install.sh | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/containerscrew/aws-sso-auth/main/scripts/install.sh | bash
 ```
 
 ## Using cargo
