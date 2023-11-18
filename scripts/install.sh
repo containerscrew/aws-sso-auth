@@ -99,7 +99,8 @@ download_release() {
   tmpdir=$(mktemp -d)
 
   cd "$tmpdir"
-  echo -e "Downloading... ${LATEST_VERSION}/${PROJECT}-${OS}-${cli_arch}.zip \n"
+  # shellcheck disable=SC2059
+  printf "Downloading... ${LATEST_VERSION}/${PROJECT}-${OS}-${cli_arch}.zip \n"
   # shellcheck disable=SC2086
   curl -L --fail --remote-name-all https://github.com/containerscrew/${PROJECT}/releases/download/"${LATEST_VERSION}"/${PROJECT}-"${OS}"-${cli_arch}.zip
   unzip ${PROJECT}-"${OS}"-"${cli_arch}".zip  ${PROJECT}
