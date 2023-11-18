@@ -11,6 +11,5 @@ pub fn setup_logger(log_level: &String) {
     tracing_subscriber::fmt()
         .with_thread_names(true)
         .with_max_level(log_level)
-        .pretty()
         .init();
 }
