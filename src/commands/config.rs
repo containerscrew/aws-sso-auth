@@ -42,6 +42,7 @@ impl Configuration {
             Ok(file) => file,
             Err(err) => {
                 error!("Can't create configuration file. {}", err);
+                error!("Dir ~/.aws exists?");
                 exit(1);
             }
         };

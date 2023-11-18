@@ -20,7 +20,10 @@ pub fn start(region_name: String, start_url: String, workers: usize, retries: u3
     match runtime {
         Ok(_) => info!("All good, bye! 👋"),
         Err(err) => {
-            error!("Error executing tokio runtime. {}", err);
+            error!(error = err, "Error executing tokio runtime");
+            if err.to_string() == "InvalidRequestException" {
+                error!("Is the configuration in ~/.aws/aws-sso-auth.json valid?");
+            }
         }
     }
 }
