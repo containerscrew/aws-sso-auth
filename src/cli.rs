@@ -5,10 +5,11 @@ use crate::logger::setup_logger;
 use clap::{Parser, Subcommand};
 use std::error::Error;
 
+
 #[derive(Parser)]
 #[clap(
     about = "aws-sso-auth",
-    version = "0.0.1",
+    version = env!("CARGO_PKG_VERSION"),
     author = "Daniels info@containerscrew.com",
     about = "Get your ~/.aws/credentials using AWS SSO and your external IDP",
     arg_required_else_help = true

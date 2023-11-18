@@ -4,6 +4,7 @@ version = "0.2.0"
 edition = "2021"
 authors = ["containerscrew info@containerscrew.com"]
 rust-version = "1.72.0"
+repository = "https://github.com/containerscrew/aws-sso-auth"
 
 
 [dependencies]

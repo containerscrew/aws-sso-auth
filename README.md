@@ -58,7 +58,7 @@
 
 # Pipeline badges
 ![Test Status](https://github.com/containerscrew/aws-sso-auth/actions/workflows/test.yml/badge.svg)
-![Release Status](https://github.com/containerscrew/aws-sso-auth/actions/workflows/release.yml/badge.svg)
+![Build Status](https://github.com/containerscrew/aws-sso-auth/actions/workflows/build.yml/badge.svg)
 ![Git Leaks Status](https://github.com/containerscrew/aws-sso-auth/actions/workflows/gitleaks.yml/badge.svg)
 ![Coverage](https://github.com/containerscrew/aws-sso-auth/actions/workflows/coverage.yml/badge.svg)
 
