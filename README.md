@@ -39,14 +39,16 @@
 - [Usage](#usage)
   - [Setup configuration](#setup-configuration)
   - [Start fetching credentials](#start-fetching-credentials)
-  - [Debug level](#debug-level)
+  - [Debug logging](#debug-logging)
   - [Check version](#check-version)
-- [Help command](#help-command)
+  - [Help command](#help-command)
   - [Take a look inside `~/.aws/credentials`](#take-a-look-inside-awscredentials)
   - [Example of credentials file](#example-of-credentials-file)
-  - [Switching accounts in your terminal](#switching-accounts-in-your-terminal)
-- [Fish shell](#fish-shell)
+- [Switching accounts in your terminal](#switching-accounts-in-your-terminal)
+  - [ZSH/BASH shell](#zshbash-shell)
+  - [Fish shell](#fish-shell)
   - [Setting AWS_PROFILE](#setting-aws_profile)
+- [Demo](#demo)
 - [TO DO (not implemented yet)](#to-do-not-implemented-yet)
 - [Contribution](#contribution)
 - [LICENSE](#license)
@@ -135,11 +137,11 @@ aws-sso-auth start -w 5 -r 40
 
 > This will open your default local browser where you have your IDP authenticated. In my case, I used Google as external IDP with AWS SSO
 
-If everything went well, you must validate the authentication. Something like that:
+If everything went well, you must authorize the request. Something like that:
 
 ![Example authentication window](./assets/aws-auth-screen.png)
 
-## Debug level
+## Debug logging
 
 ```shell
 aws-sso-auth -l debug start
@@ -153,7 +155,7 @@ aws-sso-auth -l debug start
 aws-sso-auth --version
 ```
 
-# Help command
+## Help command
 
 ```shell
 aws-sso-auth --help
@@ -185,7 +187,9 @@ aws_access_key_id=XXXX
 aws_session_token=XXXX
 ```
 
-## Switching accounts in your terminal
+# Switching accounts in your terminal
+
+## ZSH/BASH shell
 
 Copy the following function in your `~/.zshrc` or `~/.bashrc`:
 
@@ -201,7 +205,7 @@ Then, `source` the file if needed:
 source ~/.zshrc or source ~/.bashrc
 ```
 
-# Fish shell
+## Fish shell
 
 Copy the following function inside `~/.config/fish/function/aws-profile.fish`
 
@@ -230,6 +234,10 @@ Type `aws-profile` in your terminal, and you will see all the accounts you have 
 > **fzf** is needed as a dependency for the interactive account switcher
 
 [Official documentation](https://github.com/junegunn/fzf#installation)
+
+# Demo
+
+
 
 
 # TO DO (not implemented yet)
