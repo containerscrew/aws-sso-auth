@@ -43,6 +43,7 @@
   - [Check version](#check-version)
 - [Help command](#help-command)
   - [Take a look inside `~/.aws/credentials`](#take-a-look-inside-awscredentials)
+  - [Example of credentials file](#example-of-credentials-file)
   - [Switching accounts in your terminal](#switching-accounts-in-your-terminal)
 - [Fish shell](#fish-shell)
   - [Setting AWS_PROFILE](#setting-aws_profile)
@@ -60,10 +61,10 @@
 
 # Introduction
 
-This tool will help you download your AWS organization's account credentials using `AWS SSO`. What we previously set manually with *IAM users* (aws_access_key_id and aws_secret_access_key), we now have automatically using AWS SSO (+ expiration token, depending on what you have configured).
+This tool will help you download your AWS organization's account credentials using `AWS SSO`. What we previously set manually with *IAM users* **(aws_access_key_id and aws_secret_access_key)**, we now have automatically using AWS SSO.
 In this case ONLY Google Workspaces has been tested as external IDP. [More info in supported IDP, just below](https://github.com/containerscrew/aws-sso-auth/tree/latest_refactors#supported-idp)
 
-In short, we want to have the credentials of our AWS accounts/roles, using AWS SSO, stored in our ~/.aws/credentials` to be able to work daily with our tools (terraform, aws cli...)
+In short, we want to have the credentials of our `AWS accounts/roles`, using `AWS SSO`, stored in our `~/.aws/credentials` to be able to work daily with our tools **(terraform, aws cli...)**
 
 # Requirements
 
@@ -134,6 +135,10 @@ aws-sso-auth start -w 5 -r 40
 
 > This will open your default local browser where you have your IDP authenticated. In my case, I used Google as external IDP with AWS SSO
 
+If everything went well, you must validate the authentication. Something like that:
+
+![Example authentication window](./assets/aws-auth-screen.png)
+
 ## Debug level
 
 ```shell
@@ -160,6 +165,24 @@ aws-sso-auth --help
 
 ```shell
 cat ~/.aws/credentials
+```
+
+The configuration file should be something like this:
+
+## Example of credentials file
+
+```toml
+[Account1@administrator]
+aws_secret_access_key=XXXX
+region=eu-west-1
+aws_access_key_id=XXXX
+aws_session_token=XXXX
+
+[Account2@read-only]
+aws_secret_access_key=XXXX
+region=eu-west-1
+aws_access_key_id=XXXX
+aws_session_token=XXXX
 ```
 
 ## Switching accounts in your terminal
@@ -220,6 +243,7 @@ all their config (start-url, region) inside the config file.
 * Changelog with release-please
 * Create Homebrew Formula
 * Documentation in code functions
+* Customize how account credentials are saved: `[AccountName@RoleName]` for `[WHATEVER]`
 
 # Contribution
 
