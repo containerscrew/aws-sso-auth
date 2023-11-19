@@ -74,7 +74,7 @@ pub fn write_configuration(all_credentials: Vec<AccountCredentials>, region_name
         };
     }
 
-    info!("Configuration file saved!")
+    info!("Configuration file saved: {}", CREDENTIALS_FILE_PATH)
 }
 
 // pub fn config_file_exists(path: &str) {

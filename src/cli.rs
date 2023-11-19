@@ -5,7 +5,6 @@ use crate::logger::setup_logger;
 use clap::{Parser, Subcommand};
 use std::error::Error;
 
-
 #[derive(Parser)]
 #[clap(
     about = "aws-sso-auth",
@@ -60,7 +59,7 @@ enum Commands {
             short = 'w',
             long = "workers",
             help = "Number of threads! Recommended: 5/8 max to avoid AWS API 429 errors TooManyRequestsException",
-            default_value = "5",
+            default_value = "6",
             required = false
         )]
         workers: usize,
@@ -68,7 +67,7 @@ enum Commands {
             short = 'r',
             long = "retries",
             help = "Number of retries when you have AWS API errors",
-            default_value = "50",
+            default_value = "60",
             required = false
         )]
         retries: u32,
