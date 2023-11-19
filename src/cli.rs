@@ -19,7 +19,7 @@ pub struct Cli {
     #[arg(
         short = 'l',
         long = "log-level",
-        help = "Log level for logging tracing. Default: info",
+        help = "Log level for logging tracing. Possible values: info, warn, trace, debug, error. Default: info",
         default_value = "info",
         required = false
     )]
