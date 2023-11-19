@@ -144,10 +144,12 @@ Or with flags:
 aws-sso-auth start -w 5 -r 40
 ```
 
-* **workers:** Number of async/thread AWS API calls. + threads == + speed. Recommended: 5/8 max to avoid AWS API 429 errors TooManyRequestsException. Default: 5
-* **retries:** Number of retries when AWS API return errors. Default: 50
+* **workers:** Number of async/thread AWS API calls. + threads == + speed. Recommended: 5/8 max to avoid AWS API 429 errors TooManyRequestsException. Default: 6
+* **retries:** Number of retries when AWS API return errors. Default: 60
 
 > This will open your default local browser where you have your IDP authenticated. In my case, I used Google as external IDP with AWS SSO
+
+> Adjust the number of concurrent threads and retries depending on the number of accounts you have. If you only have 10 accounts (for example), it wouldn't make much sense to maybe use 20 workers and 100 retries, right?
 
 If everything went well, you must authorize the request. Something like that:
 
