@@ -34,7 +34,7 @@
 - [Supported platforms](#supported-platforms)
 - [Supported IDP](#supported-idp)
 - [Installation](#installation)
-  - [Quick installation](#quick-installation)
+  - [Quick installation (latest version)](#quick-installation-latest-version)
   - [Using cargo](#using-cargo)
   - [Build locally](#build-locally)
 - [Usage](#usage)
@@ -90,7 +90,7 @@ If using other IDP with AWS SSO in your organization, and this tool don't work, 
 
 # Installation
 
-## Quick installation
+## Quick installation (latest version)
 
 ```shell
 curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/containerscrew/aws-sso-auth/main/scripts/install.sh | bash
@@ -116,6 +116,8 @@ cd aws-sso-auth/
 cargo build --release
 ./target/release/aws-sso-auth
 ```
+
+> If you need to install specific version, go to https://github.com/containerscrew/aws-sso-auth/releases and download the binary
 
 # Usage
 
