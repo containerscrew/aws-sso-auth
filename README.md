@@ -49,7 +49,7 @@
   - [Zsh/Bash shell](#zshbash-shell)
   - [Fish shell](#fish-shell)
   - [Setting AWS_PROFILE](#setting-aws_profile)
-- [Capture examples](#capture-examples)
+- [Examples](#examples)
 - [TO DO (not implemented yet)](#to-do-not-implemented-yet)
 - [Contribution](#contribution)
 - [LICENSE](#license)
@@ -247,7 +247,7 @@ Type `aws-profile` in your terminal, and you will see all the accounts you have 
 
 [Official documentation](https://github.com/junegunn/fzf#installation)
 
-# Capture examples
+# Examples
 
 ![Executing start command](./assets/aws-sso-auth-start.png)
 ![Final result](./assets/final-result.png)
