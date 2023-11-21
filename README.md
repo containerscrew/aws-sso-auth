@@ -227,7 +227,7 @@ Copy the following function inside `~/.config/fish/function/aws-profile.fish`
 
 ```shell
 function aws-profile
-    set -Ux AWS_PROFILES $(cat ~/.aws/credentials | sed -n -e 's/^\[\(.*\)\]/\1/p' | fzf)
+    set -gx AWS_PROFILES $(cat ~/.aws/credentials | sed -n -e 's/^\[\(.*\)\]/\1/p' | fzf)
     if test -n "$AWS_PROFILES"
         set -xg AWS_PROFILE $AWS_PROFILES
         echo "Selected profile: $AWS_PROFILES"
